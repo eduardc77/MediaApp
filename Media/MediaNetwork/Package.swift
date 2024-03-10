@@ -7,7 +7,7 @@ let package = Package(
     name: "MediaNetwork",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v15),
+        .iOS(.v16),
         .macOS(.v13),
         .watchOS(.v9),
         .tvOS(.v16)
