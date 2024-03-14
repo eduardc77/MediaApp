@@ -8,6 +8,7 @@ import MediaUI
 import MediaContentful
 
 struct VideoBannerView: View {
+    var router: any Router
     var model: VideoBanner
     
     var body: some View {
@@ -23,19 +24,19 @@ struct VideoBannerView: View {
                         .multilineTextAlignment(.leading)
                 }
                 
-                if let article = model.dataLink?.item as? Article {
-                    HStack {
-                        NavigationLink(value: article, label: {
-                            Text(model.ctaText ?? "").fontWeight(.semibold)
-                                .padding(2)
-                        })
-                        .controlSize(.small)
-                        .buttonStyle(.borderedProminent)
-                        
-                        Spacer()
+                HStack {
+                    switch model.dataLink?.item {
+                    case let article as Article:
+                        CTAButton(title: model.ctaText ?? "") {
+                            router.push(article)
+                        }
+                        //...
+                    default:
+                        EmptyView()
                     }
-                    .padding(.leading, .small)
+                    Spacer()
                 }
+                .padding(.leading, .small)
             }
             .padding()
             .background(model.backgroundColor != nil ? Color(hex: model.backgroundColor ?? "") : Color(.systemBackground))

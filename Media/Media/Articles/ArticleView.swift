@@ -122,3 +122,7 @@ private extension ArticleView {
         .padding(.vertical)
     }
 }
+
+#Preview {
+    ArticleView(articleId: "58AAxmghXsVANmbwp9CClk")      .frame(height: 800)
+}

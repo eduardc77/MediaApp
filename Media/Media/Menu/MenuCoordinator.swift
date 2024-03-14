@@ -76,7 +76,7 @@ enum MenuFullScreenCoverDestination: Identifiable {
 struct MenuCoordinator_Previews: PreviewProvider {
     static var previews: some View {
         MenuCoordinator()
-            .environmentObject(AppTabCoordinator())
+            .environmentObject(AppTabRouter())
             .environmentObject(ModalScreenRouter())
     }
 }

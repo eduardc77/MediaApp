@@ -7,23 +7,37 @@ import SwiftUI
 import MediaContentful
 
 struct HomeCoordinator: View {
-    @State private var homeNavigationPath = NavigationPath()
+    @StateObject private var router = HomeViewRouter()
+    @EnvironmentObject private var tabRouter: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
+    @Environment(\.openURL) var openURL
     
     var body: some View {
-        NavigationStack(path: $homeNavigationPath) {
-            HomeView(homePath: $homeNavigationPath)
-                .navigationDestination(for: Article.self) { article in
-                    ArticleView(articleId: article.id)
+        NavigationStack(path: $router.path) {
+            HomeView()
+                .navigationDestination(for: AnyHashable.self) { destination in
+                    switch destination {
+                    case let article as Article:
+                        ArticleView(articleId: article.id)
+                    default:
+                        EmptyView()
+                    }
                 }
+                .onReceive(tabRouter.$tabReselected) { tabReselected in
+                    guard tabReselected, tabRouter.selection == .home, !router.path.isEmpty else { return }
+                    router.popToRoot()
+                }
+                .onReceive(router.$url) { newValue in
+                    guard let url = newValue else { return }
+                    openURL(url)
+                }
+                .environmentObject(router)
         }
     }
 }
 
-struct HomeCoordinator_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeCoordinator()
-            .environmentObject(AppTabCoordinator())
-            .environmentObject(ModalScreenRouter())
-    }
+#Preview {
+    HomeCoordinator()
+        .environmentObject(AppTabRouter())
+        .environmentObject(ModalScreenRouter())
 }

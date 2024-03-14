@@ -30,6 +30,6 @@ enum VideoDestination: Hashable {
 struct VideosCoordinator_Previews: PreviewProvider {
     static var previews: some View {
         VideosCoordinator()
-            .environmentObject(AppTabCoordinator())
+            .environmentObject(AppTabRouter())
     }
 }

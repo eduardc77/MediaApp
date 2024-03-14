@@ -8,7 +8,7 @@ import SwiftUI
 struct MenuView: View {
     @Binding var menuPath: NavigationPath
     
-    @EnvironmentObject private var tabCoordinator: AppTabCoordinator
+    @EnvironmentObject private var tabCoordinator: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
     @Environment(\.openURL) private var openURL
     

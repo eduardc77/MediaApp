@@ -8,18 +8,12 @@ import MediaContentful
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
-    @Binding var homePath: NavigationPath
-    
-    @EnvironmentObject private var tabCoordinator: AppTabCoordinator
+    @EnvironmentObject private var homeRouter: HomeViewRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
     
     var body: some View {
         baseView
-            .navigationBar(title: "Home")
-            .onReceive(tabCoordinator.$tabReselected) { tabReselected in
-                guard tabReselected, tabCoordinator.selection == .home, !homePath.isEmpty else { return }
-                homePath.removeLast(homePath.count)
-            }
+            .navigationBar(title: "Home")    
     }
 }
 
@@ -34,7 +28,7 @@ private extension HomeView {
             if let sections = viewModel.homeLayout?.sections, !sections.isEmpty {
                 homeLayout(with: sections)
             }
-            
+
         case .loading:
             ProgressView("Loading")
             
@@ -65,13 +59,13 @@ private extension HomeView {
                 ForEach(sections, id: \.self.sys.id) { section in
                     switch section.component {
                     case let component as HeroBanner:
-                        HeroBannerView(model: component)
+                        HeroBannerView(router: homeRouter, model: component)
                         
                     case let component as VideoBanner:
-                        VideoBannerView(model: component)
+                        VideoBannerView(router: homeRouter, model: component)
                         
                     case let component as Carousel:
-                        CarouselView(model: component)
+                        CarouselView(router: homeRouter, model: component)
                         
                     default: EmptyView()
                     }
@@ -86,10 +80,9 @@ private extension HomeView {
 }
 
 
-//struct HomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeView(homePath: <#Binding<NavigationPath>#>)
-//            .environmentObject(AppTabCoordinator())
-//            .environmentObject(ModalScreenRouter())
-//    }
-//}
+#Preview {
+    HomeView()
+        .environmentObject(AppTabRouter())
+        .environmentObject(ModalScreenRouter())
+}
+

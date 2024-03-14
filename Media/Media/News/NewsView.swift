@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct NewsView: View {
-    @EnvironmentObject private var tabCoordinator: AppTabCoordinator
+    @EnvironmentObject private var tabCoordinator: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
     
     @StateObject private var viewModel = NewsViewModel()

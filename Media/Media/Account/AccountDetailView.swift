@@ -24,7 +24,7 @@ struct AccountDetailView: View {
         }
     }
 }
-
+//
 //#Preview {
-//    MenuDetailView()
+//    MenuDetailView(path: <#T##Binding<NavigationPath>#>)
 //}

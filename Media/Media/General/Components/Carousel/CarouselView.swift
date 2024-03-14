@@ -8,6 +8,7 @@ import MediaUI
 import MediaContentful
 
 struct CarouselView: View {
+    var router: any Router
     var model: Carousel
     
     var body: some View {
@@ -19,7 +20,7 @@ struct CarouselView: View {
                 mediumCarouselView(with: items)
             case .large:
                 largeCarouselView(with: items)
-            default: 
+            default:
                 EmptyView()
             }
         }
@@ -32,38 +33,47 @@ private extension CarouselView {
     
     @ViewBuilder
     func smallCarouselView(with items: [GroupItem]) -> some View {
-        switch items {
-        case let articles as [Article]:
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack {
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack {
+                switch items {
+                case let articles as [Article]:
                     ForEach(articles, id: \.id) { article in
-                        ArticleSmallGridItem(article: article)
+                        Button {
+                            router.push(article)
+                        } label: {
+                            ArticleSmallGridItem(article: article)
+                        }
+                        .buttonStyle(.plain)
                     }
+                    //...
+                    
+                default: EmptyView()
                 }
-                .padding()
             }
-        default: EmptyView()
         }
-        
-        
+        .padding()
     }
     
     @ViewBuilder
     func mediumCarouselView(with items: [GroupItem]) -> some View {
-        switch items {
-        case let articles as [Article]:
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(spacing: 15) {
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack(spacing: 15) {
+                switch items {
+                case let articles as [Article]:
                     ForEach(articles, id: \.id) { article in
-                        ArticleMediumGridItem(article: article)
+                        Button {
+                            router.push(article)
+                        } label: {
+                            ArticleMediumGridItem(article: article)
+                        }
+                        .buttonStyle(.plain)
                     }
+                    //...
+                    
+                default: EmptyView()
                 }
-                .padding()
             }
-            
-            //...
-            
-        default: EmptyView()
+            .padding()
         }
     }
     
@@ -73,7 +83,12 @@ private extension CarouselView {
         case let articles as [Article]:
             TabView {
                 ForEach(articles, id: \.id) { article in
-                    ArticleLargeGridItem(article: article)
+                    Button {
+                        router.push(article)
+                    } label: {
+                        ArticleLargeGridItem(article: article)
+                    }
+                    .buttonStyle(.plain)
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .always))

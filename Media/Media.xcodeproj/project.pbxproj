@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		889C98712BA3875D00803F79 /* HomeViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C98702BA3875D00803F79 /* HomeViewRouter.swift */; };
+		889C98742BA3A50F00803F79 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C98732BA3A50F00803F79 /* Router.swift */; };
+		889C98762BA3A58C00803F79 /* Array+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C98752BA3A58C00803F79 /* Array+Utilities.swift */; };
 		88D62BB42B94DC9B0028DE75 /* MediaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D62BB32B94DC9B0028DE75 /* MediaApp.swift */; };
 		88D62BB82B94DC9D0028DE75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88D62BB72B94DC9D0028DE75 /* Assets.xcassets */; };
 		88D62BBB2B94DC9D0028DE75 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88D62BBA2B94DC9D0028DE75 /* Preview Assets.xcassets */; };
@@ -30,7 +33,7 @@
 		88D62C332B94DCF00028DE75 /* AppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D62BF32B94DCEF0028DE75 /* AppTabView.swift */; };
 		88D62C342B94DCF00028DE75 /* NavigationBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D62BF42B94DCEF0028DE75 /* NavigationBarModifier.swift */; };
 		88D62C352B94DCF00028DE75 /* ModalScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D62BF52B94DCEF0028DE75 /* ModalScreenRouter.swift */; };
-		88D62C362B94DCF00028DE75 /* AppTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D62BF62B94DCEF0028DE75 /* AppTabCoordinator.swift */; };
+		88D62C362B94DCF00028DE75 /* AppTabRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D62BF62B94DCEF0028DE75 /* AppTabRouter.swift */; };
 		88D62C372B94DCF00028DE75 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D62BF82B94DCEF0028DE75 /* SearchView.swift */; };
 		88D62C382B94DCF00028DE75 /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D62BF92B94DCEF0028DE75 /* SearchCoordinator.swift */; };
 		88D62C392B94DCF00028DE75 /* MenuWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D62BFB2B94DCEF0028DE75 /* MenuWebView.swift */; };
@@ -104,6 +107,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		889C98702BA3875D00803F79 /* HomeViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewRouter.swift; sourceTree = "<group>"; };
+		889C98732BA3A50F00803F79 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		889C98752BA3A58C00803F79 /* Array+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Utilities.swift"; sourceTree = "<group>"; };
 		88D62BB02B94DC9B0028DE75 /* Media.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Media.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D62BB32B94DC9B0028DE75 /* MediaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaApp.swift; sourceTree = "<group>"; };
 		88D62BB72B94DC9D0028DE75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -130,7 +136,7 @@
 		88D62BF32B94DCEF0028DE75 /* AppTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppTabView.swift; sourceTree = "<group>"; };
 		88D62BF42B94DCEF0028DE75 /* NavigationBarModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBarModifier.swift; sourceTree = "<group>"; };
 		88D62BF52B94DCEF0028DE75 /* ModalScreenRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalScreenRouter.swift; sourceTree = "<group>"; };
-		88D62BF62B94DCEF0028DE75 /* AppTabCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppTabCoordinator.swift; sourceTree = "<group>"; };
+		88D62BF62B94DCEF0028DE75 /* AppTabRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppTabRouter.swift; sourceTree = "<group>"; };
 		88D62BF82B94DCEF0028DE75 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		88D62BF92B94DCEF0028DE75 /* SearchCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		88D62BFB2B94DCEF0028DE75 /* MenuWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuWebView.swift; sourceTree = "<group>"; };
@@ -195,6 +201,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		889C98722BA3A4FD00803F79 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				889C98732BA3A50F00803F79 /* Router.swift */,
+				889C98752BA3A58C00803F79 /* Array+Utilities.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		889C98772BA3AC3400803F79 /* Carousel */ = {
+			isa = PBXGroup;
+			children = (
+				889C98782BA3AC5300803F79 /* GridItems */,
+				88D62BF02B94DCEF0028DE75 /* CarouselView.swift */,
+			);
+			path = Carousel;
+			sourceTree = "<group>";
+		};
+		889C98782BA3AC5300803F79 /* GridItems */ = {
+			isa = PBXGroup;
+			children = (
+				88D62BEF2B94DCEF0028DE75 /* ArticleGridItem.swift */,
+			);
+			path = GridItems;
+			sourceTree = "<group>";
+		};
 		88D62BA72B94DC9B0028DE75 = {
 			isa = PBXGroup;
 			children = (
@@ -226,7 +258,6 @@
 				88D62BDD2B94DCBA0028DE75 /* ContentView.swift */,
 				88D62C022B94DCEF0028DE75 /* Account */,
 				88D62BE22B94DCEF0028DE75 /* Articles */,
-				88D62BEE2B94DCEF0028DE75 /* Components */,
 				88D62C202B94DCEF0028DE75 /* General */,
 				88D62C0D2B94DCEF0028DE75 /* Home */,
 				88D62BFA2B94DCEF0028DE75 /* Menu */,
@@ -310,8 +341,9 @@
 		88D62BEE2B94DCEF0028DE75 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				88D62BEF2B94DCEF0028DE75 /* ArticleGridItem.swift */,
-				88D62BF02B94DCEF0028DE75 /* CarouselView.swift */,
+				889C98772BA3AC3400803F79 /* Carousel */,
+				88D62C112B94DCEF0028DE75 /* HeroBannerView.swift */,
+				88D62C122B94DCEF0028DE75 /* VideoBannerView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -323,7 +355,7 @@
 				88D62BF32B94DCEF0028DE75 /* AppTabView.swift */,
 				88D62BF42B94DCEF0028DE75 /* NavigationBarModifier.swift */,
 				88D62BF52B94DCEF0028DE75 /* ModalScreenRouter.swift */,
-				88D62BF62B94DCEF0028DE75 /* AppTabCoordinator.swift */,
+				88D62BF62B94DCEF0028DE75 /* AppTabRouter.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -397,21 +429,12 @@
 		88D62C0D2B94DCEF0028DE75 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				88D62C0E2B94DCEF0028DE75 /* HomeViewModel.swift */,
-				88D62C0F2B94DCEF0028DE75 /* HomeView.swift */,
-				88D62C102B94DCEF0028DE75 /* Subviews */,
 				88D62C132B94DCEF0028DE75 /* HomeCoordinator.swift */,
+				889C98702BA3875D00803F79 /* HomeViewRouter.swift */,
+				88D62C0F2B94DCEF0028DE75 /* HomeView.swift */,
+				88D62C0E2B94DCEF0028DE75 /* HomeViewModel.swift */,
 			);
 			path = Home;
-			sourceTree = "<group>";
-		};
-		88D62C102B94DCEF0028DE75 /* Subviews */ = {
-			isa = PBXGroup;
-			children = (
-				88D62C112B94DCEF0028DE75 /* HeroBannerView.swift */,
-				88D62C122B94DCEF0028DE75 /* VideoBannerView.swift */,
-			);
-			path = Subviews;
 			sourceTree = "<group>";
 		};
 		88D62C142B94DCEF0028DE75 /* Videos */ = {
@@ -456,6 +479,8 @@
 		88D62C202B94DCEF0028DE75 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				88D62BEE2B94DCEF0028DE75 /* Components */,
+				889C98722BA3A4FD00803F79 /* Router */,
 				88D62C212B94DCF00028DE75 /* ViewState */,
 			);
 			path = General;
@@ -627,7 +652,7 @@
 				88D62C322B94DCF00028DE75 /* AppScreen.swift in Sources */,
 				88D62C502B94DCF00028DE75 /* VideoGridItem.swift in Sources */,
 				88D62C512B94DCF00028DE75 /* VideosCoordinator.swift in Sources */,
-				88D62C362B94DCF00028DE75 /* AppTabCoordinator.swift in Sources */,
+				88D62C362B94DCF00028DE75 /* AppTabRouter.swift in Sources */,
 				88D62C4E2B94DCF00028DE75 /* VideoDetailView.swift in Sources */,
 				88D62C532B94DCF00028DE75 /* ViewState.swift in Sources */,
 				88D62C4F2B94DCF00028DE75 /* VideosViewModel.swift in Sources */,
@@ -640,6 +665,7 @@
 				88D62C3E2B94DCF00028DE75 /* MenuView.swift in Sources */,
 				88D62C352B94DCF00028DE75 /* ModalScreenRouter.swift in Sources */,
 				88D62C2A2B94DCF00028DE75 /* ArticleSocialMediaPreview.swift in Sources */,
+				889C98742BA3A50F00803F79 /* Router.swift in Sources */,
 				88D62C2E2B94DCF00028DE75 /* OnboardingView.swift in Sources */,
 				88D62C2B2B94DCF00028DE75 /* ArticleViewControllerRepresentable.swift in Sources */,
 				88D62C302B94DCF00028DE75 /* ArticleGridItem.swift in Sources */,
@@ -650,12 +676,14 @@
 				88D62C312B94DCF00028DE75 /* CarouselView.swift in Sources */,
 				88D62C4C2B94DCF00028DE75 /* DetailHeaderView.swift in Sources */,
 				88D62BDE2B94DCBA0028DE75 /* ContentView.swift in Sources */,
+				889C98762BA3A58C00803F79 /* Array+Utilities.swift in Sources */,
 				88D62C332B94DCF00028DE75 /* AppTabView.swift in Sources */,
 				88D62C342B94DCF00028DE75 /* NavigationBarModifier.swift in Sources */,
 				88D62C292B94DCF00028DE75 /* ArticleCustomViewExample.swift in Sources */,
 				88D62C442B94DCF00028DE75 /* NewsViewModel.swift in Sources */,
 				88D62C4B2B94DCF00028DE75 /* CastGridItem.swift in Sources */,
 				88D62C2D2B94DCF00028DE75 /* OnboardingPageView.swift in Sources */,
+				889C98712BA3875D00803F79 /* HomeViewRouter.swift in Sources */,
 				88D62C382B94DCF00028DE75 /* SearchCoordinator.swift in Sources */,
 				88D62C3A2B94DCF00028DE75 /* MenuChildView.swift in Sources */,
 				88D62C3B2B94DCF00028DE75 /* MenuCarouselView.swift in Sources */,

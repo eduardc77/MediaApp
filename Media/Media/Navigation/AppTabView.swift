@@ -6,11 +6,11 @@
 import SwiftUI
 
 struct AppTabView: View {
-    @StateObject private var tabCoordinator = AppTabCoordinator()
+    @StateObject private var tabRouter = AppTabRouter()
     @StateObject private var modalRouter = ModalScreenRouter()
     
     var body: some View {
-        TabView(selection: $tabCoordinator.selection) {
+        TabView(selection: $tabRouter.selection) {
             ForEach(AppScreen.allCases) { screen in
                 screen.destination
                     .tag(screen as AppScreen?)
@@ -24,7 +24,7 @@ struct AppTabView: View {
                  arrowEdge: modalRouter.presentedPopover.arrowEdge,
                  content: popoverContent)
         .alert($modalRouter.alert)
-        .environmentObject(tabCoordinator)
+        .environmentObject(tabRouter)
         .environmentObject(modalRouter)
         .onOpenURL { url in
             

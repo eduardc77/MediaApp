@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct MenuChildView: View {
-    @EnvironmentObject private var tabCoordinator: AppTabCoordinator
+    @EnvironmentObject private var tabCoordinator: AppTabRouter
     @Binding  var navigationPath: NavigationPath
     
     var body: some View {

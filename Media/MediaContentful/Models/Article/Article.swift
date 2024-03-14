@@ -52,7 +52,7 @@ public final class Article: GroupItem, EntryDecodable, FieldKeysQueryable {
     }
 }
 
-extension Article: Hashable {
+extension Article: Hashable, Equatable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(sys.id)
     }
