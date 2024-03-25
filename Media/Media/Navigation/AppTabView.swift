@@ -8,6 +8,7 @@ import SwiftUI
 struct AppTabView: View {
     @StateObject private var tabRouter = AppTabRouter()
     @StateObject private var modalRouter = ModalScreenRouter()
+    @Environment(\.openURL) var openURL
     
     var body: some View {
         TabView(selection: $tabRouter.selection) {
@@ -28,6 +29,10 @@ struct AppTabView: View {
         .environmentObject(modalRouter)
         .onOpenURL { url in
             
+        }
+        .onReceive(tabRouter.$urlString) { newValue in
+            guard let urlString = newValue, let url = URL(string: urlString) else { return }
+            openURL(url)
         }
     }
     
@@ -93,6 +98,6 @@ enum NavigationBarFullScreenCoverDestination: Identifiable {
     var id: String { UUID().uuidString }
 }
 
-//#Preview {
-//    AppTabView()
-//}
+#Preview {
+    AppTabView()
+}

@@ -7,8 +7,7 @@ import SwiftUI
 
 final class HomeViewRouter: Router {
     @Published var path = [AnyHashable]()
-    @Published var url: URL?
-    
+
     init() {}
     
     func push(_ screen: AnyHashable) {
@@ -34,9 +33,4 @@ final class HomeViewRouter: Router {
     func popToRoot() {
         path.popToRoot()
     }
-
-    func openURL(_ url: URL) {
-        self.url = url
-    }
-    
 }

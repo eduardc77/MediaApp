@@ -9,9 +9,7 @@ import MediaContentful
 struct HomeCoordinator: View {
     @StateObject private var router = HomeViewRouter()
     @EnvironmentObject private var tabRouter: AppTabRouter
-    @EnvironmentObject private var modalRouter: ModalScreenRouter
-    @Environment(\.openURL) var openURL
-    
+
     var body: some View {
         NavigationStack(path: $router.path) {
             HomeView()
@@ -26,10 +24,6 @@ struct HomeCoordinator: View {
                 .onReceive(tabRouter.$tabReselected) { tabReselected in
                     guard tabReselected, tabRouter.selection == .home, !router.path.isEmpty else { return }
                     router.popToRoot()
-                }
-                .onReceive(router.$url) { newValue in
-                    guard let url = newValue else { return }
-                    openURL(url)
                 }
                 .environmentObject(router)
         }

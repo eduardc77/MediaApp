@@ -6,6 +6,7 @@
 import Foundation
 
 final class AppTabRouter: ObservableObject {
+
     @Published var selection: AppScreen = .home {
         willSet {
             if selection == newValue {
@@ -16,4 +17,6 @@ final class AppTabRouter: ObservableObject {
     
     /// Needed for going back to root view when tapping the already selected tab.
     @Published var tabReselected: Bool = false
+    
+    @Published var urlString: String?
 }

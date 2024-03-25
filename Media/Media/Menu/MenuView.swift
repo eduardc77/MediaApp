@@ -10,8 +10,7 @@ struct MenuView: View {
     
     @EnvironmentObject private var tabCoordinator: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
-    @Environment(\.openURL) private var openURL
-    
+
     private let urlString = "https://www.apple.com"
     
     var body: some View {
@@ -39,7 +38,7 @@ struct MenuView: View {
             }
             Section("Web View Navigation and Presenters") {
                 Button {
-                    openURL(URL(string: urlString)!)
+                    tabCoordinator.urlString = urlString
                 } label: {
                     Label("External Link", systemImage: "link")
                 }

@@ -11,5 +11,4 @@ public protocol Router: ObservableObject {
     func push(_ screen: AnyHashable)
     func dismiss()
     func popToRoot()
-    func openURL(_ url: URL)
 }
