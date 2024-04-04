@@ -1,11 +1,11 @@
 //
-//  HomeRouter.swift
+//  VideoViewRouter.swift
 //  Media
 //
 
 import Foundation
 
-final class HomeViewRouter: Router {
+final class VideoViewRouter: Router {
     @Published var path = [AnyHashable]()
 
     init() {}

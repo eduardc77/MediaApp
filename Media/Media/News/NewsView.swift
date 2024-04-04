@@ -6,19 +6,14 @@
 import SwiftUI
 
 struct NewsView: View {
+    @StateObject private var viewModel = NewsViewModel()
+    @EnvironmentObject private var router: NewsViewRouter
     @EnvironmentObject private var tabCoordinator: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
-    
-    @StateObject private var viewModel = NewsViewModel()
-    @Binding var newsPath: NavigationPath
     
     var body: some View {
         baseView()
             .navigationBar(title: "News")
-            .onReceive(tabCoordinator.$tabReselected) { tabReselected in
-                guard tabReselected, tabCoordinator.selection == .news, !newsPath.isEmpty else { return }
-                newsPath.removeLast(newsPath.count)
-            }
             .refreshable {
                 Task {
                     await viewModel.fetchNews()
@@ -68,7 +63,7 @@ private extension NewsView {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
             ForEach(Array(viewModel.allNews.enumerated()), id: \.offset) { index, article in
                 Button {
-                    newsPath.append(article)
+                    router.push(article)
                 } label: {
                     NewsGridItem(item: NewsItem(imageUrl: article.urlToImage ?? "",
                                                 owner: article.source?.name ?? "",

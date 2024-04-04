@@ -4,10 +4,10 @@
 //
 
 import SwiftUI
+import MediaUI
 
 struct MenuView: View {
-    @Binding var menuPath: NavigationPath
-    
+    @EnvironmentObject private var router: MenuViewRouter
     @EnvironmentObject private var tabCoordinator: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
 
@@ -16,18 +16,27 @@ struct MenuView: View {
     var body: some View {
         Form {
             Section("Navigate through Path") {
-                NavigationLink(value: MenuDestination.menuChildView, label: {
+                NavigationButton {
+                    router.push(MenuDestination.menuChildView)
+                } label: {
                     Text("Navigate to Menu Child View")
-                })
-                NavigationLink(value: SecondMenuDestination.standingsView, label: {
-                    Text("Navigate to Standings View")
-                })
-                NavigationLink(value: SecondMenuDestination.groupsView, label: {
-                    Text("Navigate to Groups View")
-                })
+                }
+                
+                NavigationButton {
+                    router.push(SecondMenuDestination.secondView)
+                } label: {
+                    Text("Navigate to Second View")
+                }
+                
+                NavigationButton {
+                    router.push(SecondMenuDestination.thirdView)
+                } label: {
+                    Text("Navigate to Third View")
+                }
             }
+            
             Section("Carousel Navigation Example") {
-                MenuCarouselView(menuPath: $menuPath, items:  NumberList(range: 0 ..< 10))
+                MenuCarouselView(router: router, items:  NumberList(range: 0 ..< 10))
             }
             
             Section("iPad Popovers") {
@@ -37,15 +46,17 @@ struct MenuView: View {
                                                arrowEdge: .bottom) }
             }
             Section("Web View Navigation and Presenters") {
-                Button {
+                NavigationButton {
                     tabCoordinator.urlString = urlString
                 } label: {
                     Label("External Link", systemImage: "link")
                 }
                 
-                NavigationLink(value: SecondMenuDestination.menuWebView(urlString: urlString), label: {
+                NavigationButton {
+                    router.push(SecondMenuDestination.menuWebView(urlString: urlString))
+                } label: {
                     Text("Navigate to In App WebView")
-                })
+                }
                 webViewSheetButton
                 webViewFullScreenCoverButton
             }
@@ -60,10 +71,6 @@ struct MenuView: View {
             }
         }
         .navigationBar(title: "Menu", displayMode: .large)
-        .onReceive(tabCoordinator.$tabReselected) { tabReselected in
-            guard tabReselected, tabCoordinator.selection == .menu, !menuPath.isEmpty else { return }
-            menuPath.removeLast(menuPath.count)
-        }
     }
 }
 

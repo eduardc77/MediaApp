@@ -4,24 +4,19 @@
 //
 
 import SwiftUI
+import MediaUI
 import MediaNetwork
 
 struct VideosView: View {
-    @EnvironmentObject private var tabCoordinator: AppTabRouter
-    @EnvironmentObject private var modalRouter: ModalScreenRouter
-    
     @StateObject private var viewModel = VideosViewModel()
-    @Binding var path: NavigationPath
-    
+    @EnvironmentObject private var router: VideoViewRouter
+    @EnvironmentObject private var modalRouter: ModalScreenRouter
+
     @State private var isLoading: Bool = false
     
     var body: some View {
         baseView
             .navigationBar(title: "Videos")
-            .onReceive(tabCoordinator.$tabReselected) { tabReselected in
-                guard tabReselected, tabCoordinator.selection == .videos, !path.isEmpty else { return }
-                path.removeLast(path.count)
-            }
             .searchable(text: $viewModel.searchQuery,
                         placement: .navigationBarDrawer(displayMode: .always),
                         prompt: "Search")
@@ -108,8 +103,8 @@ private extension VideosView {
     }
     
     func gridItem(for video: Video) -> some View {
-        Button {
-            path.append(VideoDestination.videoDetail(id: video.id))
+        NavigationButton {
+            router.push(VideoDestination.videoDetail(id: video.id))
         } label: {
             VideoGridItem(item: VideoItem(imageUrl: video.posterUrl(width: 200),
                                           title: video.title,
@@ -118,11 +113,8 @@ private extension VideosView {
     }
 }
 
-//struct VideosView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        VideosView()
-//            .environmentObject(AppTabCoordinator())
-//            .environmentObject(ModalScreenRouter())
-//    }
-//}
-//
+#Preview {
+    VideosView()
+        .environmentObject(ModalScreenRouter())
+}
+

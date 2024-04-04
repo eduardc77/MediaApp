@@ -4,17 +4,20 @@
 //
 
 import SwiftUI
+import MediaUI
 
 struct MenuChildView: View {
+    @EnvironmentObject private var router: MenuViewRouter
     @EnvironmentObject private var tabCoordinator: AppTabRouter
-    @Binding  var navigationPath: NavigationPath
     
     var body: some View {
         Form {
             Section {
-                NavigationLink(value: MenuDestination.menuDetailView, label: {
+                NavigationButton {
+                    router.push(MenuDestination.menuDetailView)
+                } label: {
                     Text("Navigate to Detail View")
-                })
+                }
             }
             Section {
                 Button("Select Menu Tab") {
@@ -22,7 +25,11 @@ struct MenuChildView: View {
                 }
             }
             Section {
-                Button("Go back to Root View", action: { navigationPath.removeLast(navigationPath.count) })
+                NavigationButton {
+                    router.popToRoot()
+                } label: {
+                    Text("Go back to Root View")
+                }
             }
         }
         .navigationTitle("Menu Child View")
@@ -30,8 +37,8 @@ struct MenuChildView: View {
     }
 }
 
-//#Preview {
-//    NavigationStack {
-//        MenuChildView()
-//    }
-//}
+#Preview {
+    NavigationStack {
+        MenuChildView()
+    }
+}

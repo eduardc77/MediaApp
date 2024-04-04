@@ -6,28 +6,42 @@
 import SwiftUI
 
 struct MenuCoordinator: View {
-    @State private var menuNavigationPath = NavigationPath()
+    @StateObject private var router = MenuViewRouter()
+    @EnvironmentObject private var tabCoordinator: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
     
     var body: some View {
-        NavigationStack(path: $menuNavigationPath) {
-            MenuView(menuPath: $menuNavigationPath)
-                .navigationDestination(for: MenuDestination.self, destination: menuDestination)
-                .navigationDestination(for: SecondMenuDestination.self, destination: secondMenuDestination)
-                .navigationDestination(for: Int.self, destination: { number in
-                    NumberView(path: $menuNavigationPath, number: number)
-                })
+        NavigationStack(path: $router.path) {
+            MenuView()
+                .navigationDestination(for: AnyHashable.self) { destination in
+                    switch destination {
+                    case let menuDestination as MenuDestination:
+                        self.menuDestination(destination: menuDestination)
+                    case let secondMenuDestination as SecondMenuDestination:
+                        self.secondMenuDestination(destination: secondMenuDestination)
+                    case let number as Int:
+                        NumberView(router: router, number: number)
+                    default:
+                        EmptyView()
+                    }
+                }
         }
         .confirmationDialog($modalRouter.confirmationDialog)
+        .onReceive(tabCoordinator.$tabReselected) { tabReselected in
+            guard tabReselected, tabCoordinator.selection == .menu, !router.path.isEmpty else { return }
+            router.popToRoot()
+        }
+        .environmentObject(router)
+        
     }
     
     @ViewBuilder
     private func menuDestination(destination: MenuDestination) -> some View {
         switch destination {
         case .menuChildView:
-            MenuChildView(navigationPath: $menuNavigationPath)
+            MenuChildView()
         case .menuDetailView:
-            MenuDetailView(path: $menuNavigationPath)
+            MenuDetailView()
         case .menuDetailView2:
             Text("New Screen")
         }
@@ -38,12 +52,12 @@ struct MenuCoordinator: View {
         switch destination {
         case .menuWebView(let urlString):
             MenuWebView(urlString: urlString)
-        case .standingsView:
-            StandingsView(path: $menuNavigationPath)
-        case .standingsDetailView:
-            StandingsDetailView(path: $menuNavigationPath)
-        case .groupsView:
-            Text("Groups Screen")
+        case .secondView:
+            SecondView()
+        case .thirdView:
+            Text("Third View")
+        case .detailView:
+            SecondDetailView()
         }
     }
 }
@@ -56,9 +70,9 @@ enum MenuDestination: Hashable {
 
 enum SecondMenuDestination: Hashable {
     case menuWebView(urlString: String)
-    case standingsView
-    case standingsDetailView
-    case groupsView
+    case secondView
+    case thirdView
+    case detailView
 }
 
 enum MenuSheetDestination: Identifiable {
@@ -73,10 +87,8 @@ enum MenuFullScreenCoverDestination: Identifiable {
     var id: String { UUID().uuidString }
 }
 
-struct MenuCoordinator_Previews: PreviewProvider {
-    static var previews: some View {
-        MenuCoordinator()
-            .environmentObject(AppTabRouter())
-            .environmentObject(ModalScreenRouter())
-    }
+#Preview {
+    MenuCoordinator()
+        .environmentObject(AppTabRouter())
+        .environmentObject(ModalScreenRouter())
 }

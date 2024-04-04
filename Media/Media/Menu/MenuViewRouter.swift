@@ -1,11 +1,11 @@
 //
-//  HomeRouter.swift
+//  MenuViewRouter.swift
 //  Media
 //
 
 import Foundation
 
-final class HomeViewRouter: Router {
+final class MenuViewRouter: Router {
     @Published var path = [AnyHashable]()
 
     init() {}

@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct MenuCarouselView: View {
-    @Binding var menuPath: NavigationPath
+    var router: any Router
     var items: NumberList
     
     var body: some View {
@@ -15,7 +15,7 @@ struct MenuCarouselView: View {
                 ForEach(items.range, id: \.self) { item in
                     // Navigation Button
                     Button {
-                        menuPath.append(item)
+                        router.push(item)
                     } label: {
                         Text("Carousel Item \(item)")
                             .padding()
@@ -35,7 +35,7 @@ struct NumberList: Hashable {
 }
 
 struct NumberView: View {
-    @Binding var path: NavigationPath
+    var router: any Router
     @State var number: Int
     
     var body: some View {
@@ -44,7 +44,7 @@ struct NumberView: View {
                 Text("\(number)").font(.title)
             }
             Section {
-                Button("Go back to root", action: { path.removeLast(path.count) })
+                Button("Go back to root", action: { router.popToRoot() })
             }
         }
         .navigationTitle("Carousel Item \(number)")
