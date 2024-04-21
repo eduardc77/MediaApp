@@ -31,10 +31,10 @@
 
 ## Description
 
-This project aims to demonstrate how to implement CMS with SwiftUI and Contentful.
-Conentul enables to build your own custom mobile app backend. The 'home' tab screen consumes content from Cotnentful and dynamicaly builds the sections an components based on the "Layout" content model created in the Contentful platform and every change is reflected in the app. 
+This project aims to demonstrate how to implement CMS with SwiftUI and Contentful as well as an implementation and consumtion of a generic networking layer that can be used with any API call. 
+Conentul enables to build your own custom mobile app backend. The 'home' tab screen consumes content from Cotnentful and dynamicaly builds the sections an components based on the 'Layout' content model created in the Contentful platform and every change is reflected in the app. 
 
-This app was created for educational purposes and as a demonstration of SwiftUI and Contentful integration.
+This app was created for educational purposes and as a demonstration of SwiftUI and Contentful integration and the implementation of a generic networking layer.
 The app is still work in progress.
 
 ## What is Contentful?
