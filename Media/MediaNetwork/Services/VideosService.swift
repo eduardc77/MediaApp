@@ -9,11 +9,11 @@ public extension VideosService {
     
     enum Environment: ApiEnvironment {
         
-        case production(apiKey: String)
+        case develop(apiKey: String)
         
         public var url: String {
             switch self {
-            case .production: return "https://api.themoviedb.org/3"
+            case .develop: return "https://api.themoviedb.org/3"
             }
         }
         
@@ -22,7 +22,7 @@ public extension VideosService {
         public var queryParams: [String: String]? {
             // Attaching the API key via the 'api_key' query parameter.
             switch self {
-            case .production(let key): return ["api_key": key]
+            case .develop(let key): return ["api_key": key]
             }
         }
     }

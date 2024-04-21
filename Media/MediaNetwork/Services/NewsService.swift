@@ -14,9 +14,9 @@ public extension NewsService {
         
         public var url: String {
             switch self {
-            case .production: return "https://newsapi.org"
+            case .production: return ""
             case .preproduction: return ""
-            case .develop: return ""
+            case .develop: return "https://newsapi.org"
             }
         }
         
@@ -24,7 +24,7 @@ public extension NewsService {
             nil
             // Attaching the API key via the 'apiKey' query parameter.
             //            switch self {
-            //            case .production(let key): return ["X-Api-Key": key]
+            //            case .develop(let key): return ["X-Api-Key": key]
             //            }
         }
         
@@ -32,7 +32,7 @@ public extension NewsService {
             nil
             // Attaching the API key via the 'apiKey' query parameter.
             //            switch self {
-            //            case .production(let key): return ["apiKey": key]
+            //            case .develop(let key): return ["apiKey": key]
             //            }
         }
     }
