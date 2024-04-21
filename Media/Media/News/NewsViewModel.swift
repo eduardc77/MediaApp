@@ -20,7 +20,7 @@ final class NewsViewModel: BaseViewModel<ViewState> {
         do {
             let result: NewsServiceModel = try await URLSession.shared.fetchItem(
                 at: Route.allNews(country: .us),
-                in: Environment.production)
+                in: Environment.develop)
             
             self.changeState(.finished)
             self.allNews = result.articles ?? []

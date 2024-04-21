@@ -14,7 +14,7 @@ final class VideoDetailViewModel: BaseViewModel<ViewState> {
     @Published private(set) var casts: CastModel?
     
     private let session = URLSession.shared
-    private let environment = Environment.production(apiKey: DemoAPIKeys.theMovieDB)
+    private let environment = Environment.develop(apiKey: DemoAPIKeys.theMovieDB)
     
     private let id: Int?
     

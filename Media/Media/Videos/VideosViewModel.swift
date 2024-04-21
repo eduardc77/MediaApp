@@ -18,7 +18,7 @@ final class VideosViewModel: BaseViewModel<ViewState> {
     @Published var newSearchPerformed = false
     
     private let session = URLSession.shared
-    let environment = Environment.production(apiKey: DemoAPIKeys.theMovieDB)
+    let environment = Environment.develop(apiKey: DemoAPIKeys.theMovieDB)
     
     var videos: [Video] {
         searchMovies.isEmpty ? discoverMovies : searchMovies
