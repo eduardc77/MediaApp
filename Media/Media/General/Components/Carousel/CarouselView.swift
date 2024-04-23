@@ -33,47 +33,63 @@ private extension CarouselView {
     
     @ViewBuilder
     func smallCarouselView(with items: [GroupItem]) -> some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHStack {
-                switch items {
-                case let articles as [Article]:
-                    ForEach(articles, id: \.id) { article in
-                        Button {
-                            router.push(article)
-                        } label: {
-                            ArticleSmallGridItem(article: article)
+        Section {
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack {
+                    switch items {
+                    case let articles as [Article]:
+                        ForEach(articles, id: \.id) { article in
+                            Button {
+                                router.push(article)
+                            } label: {
+                                ArticleSmallGridItem(article: article)
+                            }
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
+                        //...
+                        
+                    default: EmptyView()
                     }
-                    //...
-                    
-                default: EmptyView()
                 }
+                .padding()
             }
+        } header: {
+            Text(model.title ?? "")
+                .font(.title2)
+                .fontWeight(.bold)
+                .padding(.top)
+                .padding(.leading)
         }
-        .padding()
     }
     
     @ViewBuilder
     func mediumCarouselView(with items: [GroupItem]) -> some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHStack(spacing: 15) {
-                switch items {
-                case let articles as [Article]:
-                    ForEach(articles, id: \.id) { article in
-                        Button {
-                            router.push(article)
-                        } label: {
-                            ArticleMediumGridItem(article: article)
+        Section {
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: 15) {
+                    switch items {
+                    case let articles as [Article]:
+                        ForEach(articles, id: \.id) { article in
+                            Button {
+                                router.push(article)
+                            } label: {
+                                ArticleMediumGridItem(article: article)
+                            }
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
+                        //...
+                        
+                    default: EmptyView()
                     }
-                    //...
-                    
-                default: EmptyView()
                 }
+                .padding()
             }
-            .padding()
+        } header: {
+            Text(model.title ?? "")
+                .font(.title2)
+                .fontWeight(.bold)
+                .padding(.top)
+                .padding(.leading)
         }
     }
     

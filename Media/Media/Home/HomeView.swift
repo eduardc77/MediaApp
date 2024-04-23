@@ -55,7 +55,7 @@ private extension HomeView {
     
     func homeLayout(with sections: [LayoutSection]) -> some View {
         ScrollView {
-            LazyVStack(spacing: 0) {
+            LazyVStack(alignment: .leading, spacing: 0) {
                 ForEach(sections, id: \.self.sys.id) { section in
                     switch section.component {
                     case let component as HeroBanner:
