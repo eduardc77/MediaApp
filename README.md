@@ -16,8 +16,8 @@
 https://github.com/eduardc77/MediaApp/assets/36419167/73e0175d-8600-4c41-a3d2-069fc57b408d
 
 <p align="left">
-	<img src="./Preview/Contentful-Sections-Preview.png" width="500" height="600"/>
-	<img src="./Preview/Contentful-Articles-Preview.png" width="500" height="600"/>
+	<img src="./Preview/Contentful-Sections-Preview.png" width="700" height="600"/>
+	<img src="./Preview/Contentful-Articles-Preview.png" width="700" height="600"/>
 </p>
 
 
