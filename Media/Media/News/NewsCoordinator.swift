@@ -14,9 +14,11 @@ struct NewsCoordinator: View {
     
     var body: some View {
         NavigationStack(path: $router.path) {
-            NewsView()
+            DiscoverView()
                 .navigationDestination(for: AnyHashable.self) { destination in
                     switch destination {
+                    case let newsCategory as NewsCategory:
+                        NewsView(category: newsCategory)
                     case let newsArticle as NewsArticle:
                         MediaWebView(urlString: newsArticle.url ?? "")
                             .navigationTitle(newsArticle.source?.name ?? "")
@@ -29,12 +31,13 @@ struct NewsCoordinator: View {
                     guard tabReselected, tabRouter.selection == .news, !router.path.isEmpty else { return }
                     router.popToRoot()
                 }
-                .environmentObject(router)
         }
+        .environmentObject(router)
     }
 }
 
 enum NewsDestination: Hashable {
+    case newsView(category: NewsCategory)
     case articleWebView(newsArticle: NewsArticle)
 }
 

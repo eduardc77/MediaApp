@@ -6,10 +6,15 @@
 import SwiftUI
 
 struct NewsView: View {
-    @StateObject private var viewModel = NewsViewModel()
+    @StateObject private var viewModel: NewsViewModel
+    
     @EnvironmentObject private var router: NewsViewRouter
     @EnvironmentObject private var tabCoordinator: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
+    
+    init(category: NewsCategory = .all) {
+        _viewModel = StateObject(wrappedValue: NewsViewModel(selectedCategory: category))
+    }
     
     var body: some View {
         baseView()
@@ -76,8 +81,8 @@ private extension NewsView {
     }
 }
 
-//#Preview {
-//    NavigationStack {
-//        NewsView()
-//    }
-//}
+#Preview {
+    NavigationStack {
+        NewsView()
+    }
+}

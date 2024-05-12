@@ -12,6 +12,12 @@ final class NewsViewModel: BaseViewModel<ViewState> {
     
     @Published private(set) var allNews = [NewsArticle]()
     
+    var selectedCategory: NewsCategory
+    
+    init(selectedCategory: NewsCategory) {
+        self.selectedCategory = selectedCategory
+    }
+
     @MainActor
     func fetchNews() async {
         guard state != .empty else { return }
@@ -19,7 +25,7 @@ final class NewsViewModel: BaseViewModel<ViewState> {
         
         do {
             let result: NewsServiceModel = try await URLSession.shared.fetchItem(
-                at: Route.allNews(country: .us),
+                at: selectedCategory == .all ? Route.allNews(country: .us) : Route.newsByCategory(category: selectedCategory.title, country: .us),
                 in: Environment.develop)
             
             self.changeState(.finished)

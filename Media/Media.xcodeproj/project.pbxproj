@@ -76,6 +76,9 @@
 		88ED1A2B2BBF47D5007626D0 /* VideoViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88ED1A2A2BBF47D5007626D0 /* VideoViewRouter.swift */; };
 		DD34DCA32BF0E05F00F42AB3 /* BrowserLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD34DCA22BF0E05F00F42AB3 /* BrowserLayout.swift */; };
 		DD34DCA52BF0E1FE00F42AB3 /* VideoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD34DCA42BF0E1FE00F42AB3 /* VideoRow.swift */; };
+		DD34DCA72BF0F13600F42AB3 /* NewsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD34DCA62BF0F13600F42AB3 /* NewsCategory.swift */; };
+		DD34DCA92BF0F18F00F42AB3 /* CategoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD34DCA82BF0F18F00F42AB3 /* CategoriesCell.swift */; };
+		DD34DCAD2BF0F1EB00F42AB3 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD34DCAB2BF0F1EB00F42AB3 /* DiscoverView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -181,6 +184,9 @@
 		88ED1A2A2BBF47D5007626D0 /* VideoViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewRouter.swift; sourceTree = "<group>"; };
 		DD34DCA22BF0E05F00F42AB3 /* BrowserLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserLayout.swift; sourceTree = "<group>"; };
 		DD34DCA42BF0E1FE00F42AB3 /* VideoRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRow.swift; sourceTree = "<group>"; };
+		DD34DCA62BF0F13600F42AB3 /* NewsCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCategory.swift; sourceTree = "<group>"; };
+		DD34DCA82BF0F18F00F42AB3 /* CategoriesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesCell.swift; sourceTree = "<group>"; };
+		DD34DCAB2BF0F1EB00F42AB3 /* DiscoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -424,8 +430,10 @@
 				88D62C0C2B94DCEF0028DE75 /* NewsCoordinator.swift */,
 				88ED1A282BBF45FD007626D0 /* NewsViewRouter.swift */,
 				88D62C0A2B94DCEF0028DE75 /* NewsView.swift */,
+				DD34DCAB2BF0F1EB00F42AB3 /* DiscoverView.swift */,
 				88D62C0B2B94DCEF0028DE75 /* NewsViewModel.swift */,
 				88D62C082B94DCEF0028DE75 /* Subviews */,
+				DD34DCA62BF0F13600F42AB3 /* NewsCategory.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -433,6 +441,7 @@
 		88D62C082B94DCEF0028DE75 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				DD34DCA82BF0F18F00F42AB3 /* CategoriesCell.swift */,
 				88D62C092B94DCEF0028DE75 /* NewsGridItem.swift */,
 			);
 			path = Subviews;
@@ -677,6 +686,7 @@
 				88D62C412B94DCF00028DE75 /* SecondDetailView.swift in Sources */,
 				88D62C472B94DCF00028DE75 /* HomeView.swift in Sources */,
 				88D62C432B94DCF00028DE75 /* NewsView.swift in Sources */,
+				DD34DCA72BF0F13600F42AB3 /* NewsCategory.swift in Sources */,
 				88D62C2C2B94DCF00028DE75 /* ArticleViewModel.swift in Sources */,
 				88D62C422B94DCF00028DE75 /* NewsGridItem.swift in Sources */,
 				88D62C3E2B94DCF00028DE75 /* MenuView.swift in Sources */,
@@ -684,11 +694,13 @@
 				88D62C2A2B94DCF00028DE75 /* ArticleSocialMediaPreview.swift in Sources */,
 				88ED1A2B2BBF47D5007626D0 /* VideoViewRouter.swift in Sources */,
 				889C98742BA3A50F00803F79 /* Router.swift in Sources */,
+				DD34DCAD2BF0F1EB00F42AB3 /* DiscoverView.swift in Sources */,
 				88D62C2E2B94DCF00028DE75 /* OnboardingView.swift in Sources */,
 				88D62C2B2B94DCF00028DE75 /* ArticleViewControllerRepresentable.swift in Sources */,
 				88D62C302B94DCF00028DE75 /* ArticleGridItem.swift in Sources */,
 				88D62C492B94DCF00028DE75 /* VideoBannerView.swift in Sources */,
 				88ED1A272BBF34CC007626D0 /* MenuViewRouter.swift in Sources */,
+				DD34DCA92BF0F18F00F42AB3 /* CategoriesCell.swift in Sources */,
 				88D62C462B94DCF00028DE75 /* HomeViewModel.swift in Sources */,
 				88D62C452B94DCF00028DE75 /* NewsCoordinator.swift in Sources */,
 				88D62C3D2B94DCF00028DE75 /* MenuDetailView.swift in Sources */,
