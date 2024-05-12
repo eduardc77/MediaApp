@@ -17,6 +17,34 @@ final class VideosViewModel: BaseViewModel<ViewState> {
     @Published var searchQuery = ""
     @Published var newSearchPerformed = false
     
+    @Published var movieList: MovieList = .discover {
+        willSet {
+            discoverMovies.removeAll()
+
+            Task {
+                await fetchDiscoverData()
+            }
+        }
+    }
+    
+    var route: Route {
+        switch movieList {
+        case .discover:
+            Route.discoverMovies(page: currentPage)
+        case .nowPlaying:
+            Route.nowPlaying(page: currentPage)
+        case .popular:
+            Route.popular(page: currentPage)
+        case .topRated:
+            Route.topRated(page: currentPage)
+        case .upcoming:
+            Route.upcoming(page: currentPage)
+        }
+    }
+    
+    @Published private var isLoading: Bool = false
+    
+    
     private let session = URLSession.shared
     let environment = Environment.develop(apiKey: DemoAPIKeys.theMovieDB)
     
@@ -48,7 +76,7 @@ final class VideosViewModel: BaseViewModel<ViewState> {
         }
         do {
             let result: VideoPaginationResult = try await session.fetchItem(
-                at: Route.discoverMovies(page: currentPage),
+                at: route,
                 in: environment
             )
             self.updateDiscoverResult(with: result)
@@ -101,4 +129,8 @@ final class VideosViewModel: BaseViewModel<ViewState> {
             searchMovies += result.results
         }
     }
+}
+
+enum MovieList {
+    case discover, nowPlaying, popular, topRated, upcoming
 }

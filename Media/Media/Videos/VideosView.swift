@@ -8,41 +8,50 @@ import MediaUI
 import MediaNetwork
 
 struct VideosView: View {
-    @StateObject private var viewModel = VideosViewModel()
+    @StateObject private var model = VideosViewModel()
     @EnvironmentObject private var router: VideoViewRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
-
-    @State private var isLoading: Bool = false
+    
+    @State private var layout = BrowserLayout.grid
     
     var body: some View {
         baseView
-            .navigationBar(title: "Videos")
-            .searchable(text: $viewModel.searchQuery,
+            .toolbar {
+                ToolbarItemGroup {
+                    toolbarItems
+                }
+            }
+            .searchable(text: $model.searchQuery,
                         placement: .navigationBarDrawer(displayMode: .always),
                         prompt: "Search")
-            .onChange(of: viewModel.searchQuery) { query in
+            .searchSuggestions {
+                if model.searchQuery.isEmpty {
+                    searchSuggestions
+                }
+            }
+            .onChange(of: model.searchQuery) { query in
                 guard !query.isEmpty else { return }
-                viewModel.newSearchPerformed = true
+                model.newSearchPerformed = true
                 
                 Task {
-                    await viewModel.search(with: query)
-                    viewModel.newSearchPerformed = false
+                    await model.search(with: query)
+                    model.newSearchPerformed = false
                 }
             }
     }
     
     @ViewBuilder
     private var baseView: some View {
-        switch viewModel.state {
+        switch model.state {
         case .empty:
             Label("No Data", systemImage: "newspaper")
         case .finished:
-            ScrollViewReader { scrollProxy in
-                ScrollView {
-                    videosGrid
-                }
-                .onChange(of: viewModel.searchQuery) { newValue in
-                    scrollProxy.scrollTo(0)
+            Group {
+                switch layout {
+                case .grid:
+                    grid
+                case .list:
+                    table
                 }
             }
             
@@ -56,7 +65,7 @@ struct VideosView: View {
             .onAppear {
                 modalRouter.presentAlert(title: "Error", message: error) {
                     Button("Ok") {
-                        viewModel.changeStateToEmpty()
+                        model.changeStateToEmpty()
                     }
                 }
             }
@@ -64,9 +73,7 @@ struct VideosView: View {
             ProgressView()
                 .onFirstAppear {
                     Task {
-                        isLoading = true
-                        await viewModel.fetchDiscoverData()
-                        isLoading = false
+                        await model.fetchDiscoverData()
                     }
                 }
         }
@@ -77,9 +84,39 @@ struct VideosView: View {
 
 private extension VideosView {
     
+    var grid: some View {
+        ScrollViewReader { scrollProxy in
+            ScrollView {
+                videosGrid
+            }
+            .onChange(of: model.searchQuery) { newValue in
+                scrollProxy.scrollTo(0)
+            }
+        }
+    }
+    
+    var table: some View {
+        List {
+            ForEach(model.discoverMovies) { video in
+                tableRow(for: video)
+            }
+            
+            Rectangle()
+                .fill(.clear)
+                .frame(height: 20) // Bottom padding
+                .task {
+                    if model.state != .loading, !model.videos.isEmpty {
+                        await model.loadMoreContent()
+                    }
+                }
+        }
+        .listStyle(.plain)
+    }
+    
+    
     var videosGrid: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-            ForEach(Array(viewModel.videos.enumerated()), id: \.offset) { index, video in
+            ForEach(Array(model.videos.enumerated()), id: \.offset) { index, video in
                 gridItem(for: video)
                     .id(index)
             }
@@ -87,14 +124,9 @@ private extension VideosView {
             Rectangle()
                 .fill(.clear)
                 .frame(height: 20) // Bottom padding
-                .onAppear {
-                    if !isLoading, !viewModel.videos.isEmpty {
-                        isLoading = true
-                        
-                        Task {
-                            await viewModel.loadMoreContent()
-                            isLoading = false
-                        }
+                .task {
+                    if model.state != .loading, !model.videos.isEmpty {
+                        await model.loadMoreContent()
                     }
                 }
         }
@@ -109,6 +141,54 @@ private extension VideosView {
             VideoGridItem(item: VideoItem(imageUrl: video.posterUrl(width: 200),
                                           title: video.title,
                                           date: video.releaseDate ?? ""))
+        }
+    }
+    
+    func tableRow(for video: Video) -> some View {
+        NavigationButton {
+            router.push(VideoDestination.videoDetail(id: video.id))
+        } label: {
+            VideoRow(item: VideoItem(imageUrl: video.posterUrl(width: 200),
+                                          title: video.title,
+                                          date: video.releaseDate ?? ""))
+        }
+    }
+    
+    @ViewBuilder
+    var toolbarItems: some View {
+        Menu {
+            Picker("Layout", selection: $layout) {
+                ForEach(BrowserLayout.allCases) { option in
+                    Label(option.title, systemImage: option.imageName)
+                        .tag(option)
+                }
+            }
+            .pickerStyle(.inline)
+            
+            Picker("Movie List", selection: $model.movieList) {
+                Label("Discover", systemImage: "wand.and.stars")
+                    .tag(MovieList.discover)
+                Label("Now Playing", systemImage: "play.square.stack")
+                    .tag(MovieList.nowPlaying)
+                Label("Popular", systemImage: "party.popper")
+                    .tag(MovieList.popular)
+                Label("Top Rated", systemImage: "star")
+                    .tag(MovieList.topRated)
+                Label("Upcoming", systemImage: "hourglass.start")
+                    .tag(MovieList.upcoming)
+            }
+            .pickerStyle(.inline)
+            
+        } label: {
+            Label("Layout Options", systemImage: layout.imageName)
+                .labelStyle(.iconOnly)
+        }
+    }
+    
+    var searchSuggestions: some View {
+        ForEach(model.searchMovies.prefix(10)) { movie in
+            Text("**\(movie.title)**")
+                .searchCompletion(movie.title)
         }
     }
 }

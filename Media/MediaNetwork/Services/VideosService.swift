@@ -34,6 +34,10 @@ public extension VideosService {
     
     enum Route: ApiRoute {
         case discoverMovies(page: Int)
+        case nowPlaying(page: Int)
+        case popular(page: Int)
+        case topRated(page: Int)
+        case upcoming(page: Int)
         case movie(id: Int)
         case movieCredits(id: Int)
         case movieVideos(id: Int)
@@ -43,6 +47,14 @@ public extension VideosService {
             switch self {
             case .discoverMovies: 
                 return "discover/movie"
+            case .nowPlaying:
+                return "movie/now_playing"
+            case .popular:
+                return "movie/popular"
+            case .topRated:
+                return "movie/top_rated"
+            case .upcoming:
+                return "movie/upcoming"
             case .movie(let id):
                 return "movie/\(id)"
             case .movieCredits(let id):
@@ -56,18 +68,20 @@ public extension VideosService {
         
         public var queryParams: [String: String]? {
             switch self {
-            case .discoverMovies(let page): 
+            case .discoverMovies(let page):
                 return ["language": "en-US", "sort-by": "popularity", "page": "\(page)"]
+            case .nowPlaying(let page), .popular(let page), .topRated(let page), .upcoming(let page):
+                return ["language": "en-US", "page": "\(page)"]
             case .movie, .movieCredits, .movieVideos:
                 return nil
-            case .searchMovies(let query, let page): 
+            case .searchMovies(let query, let page):
                 return ["query": query, "page": "\(page)"]
             }
         }
         
         public var httpMethod: HttpMethod {
             switch self {
-            case .discoverMovies, .movie, .movieCredits, .movieVideos, .searchMovies:
+            case .discoverMovies, .nowPlaying, .popular, .topRated, .upcoming, .movie, .movieCredits, .movieVideos, .searchMovies:
                 return .get
             }
         }

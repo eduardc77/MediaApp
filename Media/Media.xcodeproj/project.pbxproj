@@ -74,6 +74,8 @@
 		88ED1A272BBF34CC007626D0 /* MenuViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88ED1A262BBF34CC007626D0 /* MenuViewRouter.swift */; };
 		88ED1A292BBF45FD007626D0 /* NewsViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88ED1A282BBF45FD007626D0 /* NewsViewRouter.swift */; };
 		88ED1A2B2BBF47D5007626D0 /* VideoViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88ED1A2A2BBF47D5007626D0 /* VideoViewRouter.swift */; };
+		DD34DCA32BF0E05F00F42AB3 /* BrowserLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD34DCA22BF0E05F00F42AB3 /* BrowserLayout.swift */; };
+		DD34DCA52BF0E1FE00F42AB3 /* VideoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD34DCA42BF0E1FE00F42AB3 /* VideoRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +179,8 @@
 		88ED1A262BBF34CC007626D0 /* MenuViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewRouter.swift; sourceTree = "<group>"; };
 		88ED1A282BBF45FD007626D0 /* NewsViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewRouter.swift; sourceTree = "<group>"; };
 		88ED1A2A2BBF47D5007626D0 /* VideoViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewRouter.swift; sourceTree = "<group>"; };
+		DD34DCA22BF0E05F00F42AB3 /* BrowserLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserLayout.swift; sourceTree = "<group>"; };
+		DD34DCA42BF0E1FE00F42AB3 /* VideoRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -480,6 +484,7 @@
 		88D62C1C2B94DCEF0028DE75 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				DD34DCA42BF0E1FE00F42AB3 /* VideoRow.swift */,
 				88D62C1D2B94DCEF0028DE75 /* VideoGridItem.swift */,
 			);
 			path = Subviews;
@@ -491,6 +496,7 @@
 				88D62BEE2B94DCEF0028DE75 /* Components */,
 				889C98722BA3A4FD00803F79 /* Router */,
 				88D62C212B94DCF00028DE75 /* ViewState */,
+				DD34DCA22BF0E05F00F42AB3 /* BrowserLayout.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -667,6 +673,7 @@
 				88D62C532B94DCF00028DE75 /* ViewState.swift in Sources */,
 				88D62C4F2B94DCF00028DE75 /* VideosViewModel.swift in Sources */,
 				88D62C3F2B94DCF00028DE75 /* AccountDetailView.swift in Sources */,
+				DD34DCA32BF0E05F00F42AB3 /* BrowserLayout.swift in Sources */,
 				88D62C412B94DCF00028DE75 /* SecondDetailView.swift in Sources */,
 				88D62C472B94DCF00028DE75 /* HomeView.swift in Sources */,
 				88D62C432B94DCF00028DE75 /* NewsView.swift in Sources */,
@@ -702,6 +709,7 @@
 				88D62C402B94DCF00028DE75 /* SecondView.swift in Sources */,
 				88D62C2F2B94DCF00028DE75 /* OnboardingItemModel.swift in Sources */,
 				88D62C272B94DCF00028DE75 /* ArticleView.swift in Sources */,
+				DD34DCA52BF0E1FE00F42AB3 /* VideoRow.swift in Sources */,
 				88D62C522B94DCF00028DE75 /* VideosView.swift in Sources */,
 				88D62C4D2B94DCF00028DE75 /* VideoDetailViewModel.swift in Sources */,
 				88D62BB42B94DC9B0028DE75 /* MediaApp.swift in Sources */,
@@ -794,7 +802,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -851,7 +859,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
