@@ -79,6 +79,10 @@
 		DD34DCA72BF0F13600F42AB3 /* NewsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD34DCA62BF0F13600F42AB3 /* NewsCategory.swift */; };
 		DD34DCA92BF0F18F00F42AB3 /* CategoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD34DCA82BF0F18F00F42AB3 /* CategoriesCell.swift */; };
 		DD34DCAD2BF0F1EB00F42AB3 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD34DCAB2BF0F1EB00F42AB3 /* DiscoverView.swift */; };
+		DD34DCAF2BF10AF000F42AB3 /* VideosGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD34DCAE2BF10AF000F42AB3 /* VideosGrid.swift */; };
+		DD34DCB12BF10E2800F42AB3 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD34DCB02BF10E2800F42AB3 /* AppSettings.swift */; };
+		DD34DCB32BF10E5600F42AB3 /* SettingsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD34DCB22BF10E5600F42AB3 /* SettingsLabel.swift */; };
+		DD34DCB62BF10E8B00F42AB3 /* SettingsOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD34DCB52BF10E8B00F42AB3 /* SettingsOption.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,6 +191,10 @@
 		DD34DCA62BF0F13600F42AB3 /* NewsCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCategory.swift; sourceTree = "<group>"; };
 		DD34DCA82BF0F18F00F42AB3 /* CategoriesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesCell.swift; sourceTree = "<group>"; };
 		DD34DCAB2BF0F1EB00F42AB3 /* DiscoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
+		DD34DCAE2BF10AF000F42AB3 /* VideosGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosGrid.swift; sourceTree = "<group>"; };
+		DD34DCB02BF10E2800F42AB3 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		DD34DCB22BF10E5600F42AB3 /* SettingsLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLabel.swift; sourceTree = "<group>"; };
+		DD34DCB52BF10E8B00F42AB3 /* SettingsOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsOption.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -390,11 +398,12 @@
 			children = (
 				88D62BFB2B94DCEF0028DE75 /* MenuWebView.swift */,
 				88D62BFC2B94DCEF0028DE75 /* MenuChildView.swift */,
-				88D62BFD2B94DCEF0028DE75 /* Subviews */,
 				88D62BFF2B94DCEF0028DE75 /* MenuCoordinator.swift */,
 				88ED1A262BBF34CC007626D0 /* MenuViewRouter.swift */,
 				88D62C002B94DCEF0028DE75 /* MenuDetailView.swift */,
 				88D62C012B94DCEF0028DE75 /* MenuView.swift */,
+				88D62BFD2B94DCEF0028DE75 /* Subviews */,
+				DD34DCB42BF10E7500F42AB3 /* Model */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -402,6 +411,7 @@
 		88D62BFD2B94DCEF0028DE75 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				DD34DCB22BF10E5600F42AB3 /* SettingsLabel.swift */,
 				88D62BFE2B94DCEF0028DE75 /* MenuCarouselView.swift */,
 			);
 			path = Subviews;
@@ -493,6 +503,7 @@
 		88D62C1C2B94DCEF0028DE75 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				DD34DCAE2BF10AF000F42AB3 /* VideosGrid.swift */,
 				DD34DCA42BF0E1FE00F42AB3 /* VideoRow.swift */,
 				88D62C1D2B94DCEF0028DE75 /* VideoGridItem.swift */,
 			);
@@ -525,6 +536,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DD34DCB42BF10E7500F42AB3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DD34DCB52BF10E8B00F42AB3 /* SettingsOption.swift */,
+				DD34DCB02BF10E2800F42AB3 /* AppSettings.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -718,8 +738,12 @@
 				88D62C382B94DCF00028DE75 /* SearchCoordinator.swift in Sources */,
 				88D62C3A2B94DCF00028DE75 /* MenuChildView.swift in Sources */,
 				88D62C3B2B94DCF00028DE75 /* MenuCarouselView.swift in Sources */,
+				DD34DCAF2BF10AF000F42AB3 /* VideosGrid.swift in Sources */,
 				88D62C402B94DCF00028DE75 /* SecondView.swift in Sources */,
+				DD34DCB12BF10E2800F42AB3 /* AppSettings.swift in Sources */,
 				88D62C2F2B94DCF00028DE75 /* OnboardingItemModel.swift in Sources */,
+				DD34DCB32BF10E5600F42AB3 /* SettingsLabel.swift in Sources */,
+				DD34DCB62BF10E8B00F42AB3 /* SettingsOption.swift in Sources */,
 				88D62C272B94DCF00028DE75 /* ArticleView.swift in Sources */,
 				DD34DCA52BF0E1FE00F42AB3 /* VideoRow.swift in Sources */,
 				88D62C522B94DCF00028DE75 /* VideosView.swift in Sources */,

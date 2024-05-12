@@ -9,6 +9,7 @@ import MediaNetwork
 
 struct VideosView: View {
     @StateObject private var model = VideosViewModel()
+    
     @EnvironmentObject private var router: VideoViewRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
     
@@ -51,7 +52,7 @@ struct VideosView: View {
                 case .grid:
                     grid
                 case .list:
-                    table
+                    list
                 }
             }
             
@@ -85,20 +86,17 @@ struct VideosView: View {
 private extension VideosView {
     
     var grid: some View {
-        ScrollViewReader { scrollProxy in
+        GeometryReader { geometryProxy in
             ScrollView {
-                videosGrid
-            }
-            .onChange(of: model.searchQuery) { newValue in
-                scrollProxy.scrollTo(0)
+                VideosGrid(router: router, model: model, width: geometryProxy.size.width)
             }
         }
     }
     
-    var table: some View {
+    var list: some View {
         List {
             ForEach(model.discoverMovies) { video in
-                tableRow(for: video)
+                listRow(for: video)
             }
             
             Rectangle()
@@ -113,44 +111,13 @@ private extension VideosView {
         .listStyle(.plain)
     }
     
-    
-    var videosGrid: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-            ForEach(Array(model.videos.enumerated()), id: \.offset) { index, video in
-                gridItem(for: video)
-                    .id(index)
-            }
-            
-            Rectangle()
-                .fill(.clear)
-                .frame(height: 20) // Bottom padding
-                .task {
-                    if model.state != .loading, !model.videos.isEmpty {
-                        await model.loadMoreContent()
-                    }
-                }
-        }
-        .padding(.horizontal, 10)
-        
-    }
-    
-    func gridItem(for video: Video) -> some View {
-        NavigationButton {
-            router.push(VideoDestination.videoDetail(id: video.id))
-        } label: {
-            VideoGridItem(item: VideoItem(imageUrl: video.posterUrl(width: 200),
-                                          title: video.title,
-                                          date: video.releaseDate ?? ""))
-        }
-    }
-    
-    func tableRow(for video: Video) -> some View {
+    func listRow(for video: Video) -> some View {
         NavigationButton {
             router.push(VideoDestination.videoDetail(id: video.id))
         } label: {
             VideoRow(item: VideoItem(imageUrl: video.posterUrl(width: 200),
-                                          title: video.title,
-                                          date: video.releaseDate ?? ""))
+                                     title: video.title,
+                                     date: video.releaseDate ?? ""))
         }
     }
     

@@ -10,11 +10,19 @@ struct MenuView: View {
     @EnvironmentObject private var router: MenuViewRouter
     @EnvironmentObject private var tabCoordinator: AppTabRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
-
+    @EnvironmentObject private var settings: AppSettings
+    
     private let urlString = "https://www.apple.com"
     
     var body: some View {
         Form {
+            Section {
+                appThemeColorPicker
+                displayAppearancePicker
+            } header: {
+                Text("Preferences")
+            }
+            
             Section("Navigate through Path") {
                 NavigationButton {
                     router.push(MenuDestination.menuChildView)
@@ -69,8 +77,49 @@ struct MenuView: View {
                     modalRouter.presentConfirmationDialog(title: "Confirmation Dialog", buttons: { alertButtons })
                 }
             }
+            
+            Section {
+                
+            } header: {
+                VStack {
+                    Text("Media App")
+                    Text(settings.appVersion ?? "")
+                }
+                .font(.caption.weight(.medium))
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity)
+            }
+            .listRowInsets(.none)
+            .listRowBackground(Color.clear)
         }
         .navigationBar(title: "Menu", displayMode: .large)
+    }
+    
+    var appThemeColorPicker: some View {
+        Picker(selection: settings.$theme) {
+            ForEach(AppSettings.Theme.allCases, id: \.self) { theme in
+                Text(theme.title)
+                    .tag(theme)
+            }
+        } label: {
+            SettingsLabel(settingsOption: .appColor)
+        }
+        .tint(.secondary)
+        .frame(height: 20)
+    }
+    
+    var displayAppearancePicker: some View {
+        Picker(selection: settings.$displayAppearance) {
+            ForEach(AppSettings.DisplayAppearance.allCases, id: \.self) { displayAppearance in
+                displayAppearance.title
+                    .tag(displayAppearance)
+                
+            }
+        } label: {
+            SettingsLabel(settingsOption: .displayAppearance)
+        }
+        .tint(.secondary)
+        .frame(height: 20)
     }
 }
 

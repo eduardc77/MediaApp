@@ -71,7 +71,7 @@ final class VideosViewModel: BaseViewModel<ViewState> {
     @MainActor
     func fetchDiscoverData() async {
         guard state != .empty else { return }
-        if currentPage == 1 {
+        if currentPage == 1 || discoverMovies.isEmpty {
             self.changeState(.loading)
         }
         do {
