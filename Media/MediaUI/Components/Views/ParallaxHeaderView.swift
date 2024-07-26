@@ -57,7 +57,11 @@ struct ParallaxHeaderView_Previews: PreviewProvider {
                     coordinateSpace: scrollSpace,
                     height: Metric.mediaPreviewHeaderHeight
                 ) {
-                    AsyncImageView(url: URL(string: "https://docs-assets.developer.apple.com/published/9c4143a9a48a080f153278c9732c03e7/Image-1~dark@2x.png"))
+                    if let url = URL(string: "https://docs-assets.developer.apple.com/published/9c4143a9a48a080f153278c9732c03e7/Image-1~dark@2x.png") {
+                        AsyncImageView(url: url)
+                    } else {
+                        Color.secondary
+                    }
                 }
                 Rectangle()
                     .frame(height: 1000)

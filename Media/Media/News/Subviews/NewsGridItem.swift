@@ -16,11 +16,15 @@ struct NewsGridItem: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Color.clear.overlay {
-                AsyncImageView(url: URL(string: item.imageUrl), size: .custom(height: 120))
+            if let imageURl = URL(string: item.imageUrl) {
+                Color.clear.overlay {
+                    AsyncImageView(url: imageURl, size: .custom(height: 120))
+                }
+                .frame(height: 120)
+                .clipped()
+            } else {
+                Color.secondary.frame(height: 120)
             }
-            .frame(height: 120)
-            .clipped()
             
             VStack(alignment: .leading, spacing: .xxxSmall) {
                 Text(item.owner)

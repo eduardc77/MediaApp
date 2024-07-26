@@ -61,7 +61,11 @@ private extension ArticleView {
             coordinateSpace: scrollSpace,
             height: Metric.mediaPreviewHeaderHeight
         ) {
-            AsyncImageView(url: featuredImageURL)
+            if let imageUrl = featuredImageURL{
+                AsyncImageView(url: imageUrl)
+            } else {
+                Color.secondary
+            }
         }
     }
     

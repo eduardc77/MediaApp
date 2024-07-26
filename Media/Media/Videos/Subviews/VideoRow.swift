@@ -15,8 +15,12 @@ struct VideoRow: View {
     
     var body: some View {
         HStack {
-            AsyncImageView(url: item.imageUrl, size: .custom(height: 100))
-                .clipShape(RoundedRectangle(cornerRadius: 8))
+            if let imageUrl = item.imageUrl {
+                AsyncImageView(url: imageUrl, size: .custom(height: 100))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+            } else {
+                Color.secondary.frame(height: 100)
+            }
        
                 VStack(alignment: .leading) {
                     Text(item.title)

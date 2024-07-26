@@ -21,20 +21,17 @@ public extension NewsService {
         }
         
         public var headers: [String: String]? {
-            nil
-            // Attaching the API key via the 'apiKey' query parameter.
-            //            switch self {
-            //            case .develop(let key): return ["X-Api-Key": key]
-            //            }
+            switch self {
+            case .production: return nil
+            case .preproduction: return nil
+            case .develop:
+                return [
+                    "Authorization": "Bearer \(DemoAPIKeys.newsAPIKey)"
+                ]
+            }
         }
         
-        public var queryParams: [String: String]? {
-            nil
-            // Attaching the API key via the 'apiKey' query parameter.
-            //            switch self {
-            //            case .develop(let key): return ["apiKey": key]
-            //            }
-        }
+        public var queryParams: [String: String]? { nil }
     }
 }
 
@@ -76,15 +73,7 @@ public extension NewsService {
             }
         }
         
-        public var headers: [String: String]? {
-            // Attaching the API key via the Authorization HTTP header example.
-            switch self {
-            case .allNews, .searchNews, .newsByCategory:
-                return [
-                    "Authorization": "Bearer \(DemoAPIKeys.newsAPIKey)"
-                ]
-            }
-        }
+        public var headers: [String: String]? { nil }
         
         public var formParams: [String: String]? { nil }
         

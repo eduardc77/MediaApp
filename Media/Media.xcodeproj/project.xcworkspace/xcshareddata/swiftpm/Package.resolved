@@ -3,10 +3,10 @@
     {
       "identity" : "contentful.swift",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/contentful/contentful.swift/",
+      "location" : "https://github.com/contentful/contentful.swift",
       "state" : {
-        "revision" : "ef74f4d62891db05b60a060306d3fcc8b63a4f2b",
-        "version" : "5.5.9"
+        "revision" : "9662dccfe515bcc0c0aa5517663accea3f6209e1",
+        "version" : "5.5.11"
       }
     }
   ],

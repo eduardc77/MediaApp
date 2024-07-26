@@ -12,9 +12,13 @@ struct ArticleSmallGridItem: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            AsyncImageView(url: article.featuredImage?.url, size: .custom(width: 160, height: 100))
-                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
-                .overlay(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.secondary.opacity(0.2), lineWidth: 0.8))
+            if let imageUrl = article.featuredImage?.url {
+                AsyncImageView(url: imageUrl, size: .custom(width: 160, height: 100))
+                    .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                    .overlay(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.secondary.opacity(0.2), lineWidth: 0.8))
+            } else {
+                Color.secondary.frame(width: 160, height: 100)
+            }
             
             Text(article.title)
                 .font(Font.footnote)
@@ -37,8 +41,13 @@ struct ArticleMediumGridItem: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            AsyncImageView(url: article.featuredImage?.url, size: .custom(width: UIScreen.main.bounds.width - 60, height: 200))
-                .clipped()
+            if let imageUrl = article.featuredImage?.url {
+                AsyncImageView(url: imageUrl, size: .custom(height: 200))
+                    .clipped()
+            } else {
+                Color.secondary
+                    .frame(height: 200)
+            }
             
             VStack(alignment: .leading, spacing: 10) {
                 Text(article.title)
@@ -69,9 +78,11 @@ struct ArticleLargeGridItem: View {
     
     var body: some View {
         GeometryReader { geometry in
-            AsyncImageView(url: article.featuredImage?.url, size: .custom(width: geometry.size.width, height: 400))
-                .clipped()
-                .buttonStyle(.plain)
+            if let imageUrl = article.featuredImage?.url {
+                AsyncImageView(url: imageUrl, size: .custom(width: geometry.size.width, height: 400))
+                    .clipped()
+                    .buttonStyle(.plain)
+            }
         }
     }
 }
