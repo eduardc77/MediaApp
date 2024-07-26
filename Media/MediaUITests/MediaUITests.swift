@@ -2,8 +2,6 @@
 //  MediaUITests.swift
 //  MediaUITests
 //
-//  Created by iMac on 03.03.2024.
-//
 
 import XCTest
 

@@ -15,14 +15,18 @@ let package = Package(
     products: [
         .library(
             name: "MediaNetwork",
-            type: .dynamic,
             targets: ["MediaNetwork"]
         )
     ],
+    dependencies: [],
     targets: [
         .target(
             name: "MediaNetwork",
-            path: "."
+            dependencies: []
+        ),
+        .testTarget(
+            name: "Tests",
+            dependencies: ["MediaNetwork"]
         )
     ]
 )

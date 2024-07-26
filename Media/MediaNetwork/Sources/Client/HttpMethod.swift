@@ -3,7 +3,7 @@
  This enum defines various HTTP methods.
  */
 public enum HttpMethod: String, CaseIterable, Identifiable {
-    
+
     case connect
     case delete
     case get
@@ -13,10 +13,10 @@ public enum HttpMethod: String, CaseIterable, Identifiable {
     case post
     case put
     case trace
-    
+
     /// The unique HTTP method identifier.
     public var id: String { rawValue }
-    
+
     /// The uppercased HTTP method name.
     public var method: String { id.uppercased() }
 }

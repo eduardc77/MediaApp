@@ -2,8 +2,6 @@
 //  MediaTests.swift
 //  MediaTests
 //
-//  Created by iMac on 03.03.2024.
-//
 
 import XCTest
 @testable import Media

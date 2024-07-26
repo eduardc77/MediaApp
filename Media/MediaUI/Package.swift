@@ -15,14 +15,12 @@ let package = Package(
     products: [
         .library(
             name: "MediaUI",
-            type: .dynamic,
             targets: ["MediaUI"]
         )
     ],
     targets: [
         .target(
-            name: "MediaUI",
-            path: "."
+            name: "MediaUI"
         )
     ]
 )

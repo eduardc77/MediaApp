@@ -15,7 +15,6 @@ let package = Package(
     products: [
         .library(
             name: "MediaContentful",
-            type: .dynamic,
             targets: ["MediaContentful"]
         )
     ],
@@ -29,8 +28,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Contentful", package: "contentful.swift"),
                 .product(name: "MediaUI", package: "MediaUI")
-            ],
-            path: "."
+            ]
         )
     ]
 )

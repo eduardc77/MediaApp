@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8849F7AB2C5469D30054AB31 /* MediaContentful in Frameworks */ = {isa = PBXBuildFile; productRef = 8849F7AA2C5469D30054AB31 /* MediaContentful */; };
+		8849F7AD2C5469D60054AB31 /* MediaNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = 8849F7AC2C5469D60054AB31 /* MediaNetwork */; };
+		8849F7AF2C5469D90054AB31 /* MediaUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8849F7AE2C5469D90054AB31 /* MediaUI */; };
 		889C98712BA3875D00803F79 /* HomeViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C98702BA3875D00803F79 /* HomeViewRouter.swift */; };
 		889C98742BA3A50F00803F79 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C98732BA3A50F00803F79 /* Router.swift */; };
 		889C98762BA3A58C00803F79 /* Array+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889C98752BA3A58C00803F79 /* Array+Utilities.swift */; };
@@ -65,12 +68,6 @@
 		88D62C532B94DCF00028DE75 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D62C222B94DCF00028DE75 /* ViewState.swift */; };
 		88D62C542B94DCF00028DE75 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D62C232B94DCF00028DE75 /* BaseViewModel.swift */; };
 		88D62C552B94DCF00028DE75 /* ViewStateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D62C242B94DCF00028DE75 /* ViewStateProtocol.swift */; };
-		88D62C5E2B94E8410028DE75 /* MediaContentful in Frameworks */ = {isa = PBXBuildFile; productRef = 88D62C5D2B94E8410028DE75 /* MediaContentful */; };
-		88D62C5F2B94E8410028DE75 /* MediaContentful in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 88D62C5D2B94E8410028DE75 /* MediaContentful */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		88D62C612B94E8410028DE75 /* MediaNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = 88D62C602B94E8410028DE75 /* MediaNetwork */; };
-		88D62C622B94E8410028DE75 /* MediaNetwork in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 88D62C602B94E8410028DE75 /* MediaNetwork */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		88D62C642B94E8410028DE75 /* MediaUI in Frameworks */ = {isa = PBXBuildFile; productRef = 88D62C632B94E8410028DE75 /* MediaUI */; };
-		88D62C652B94E8410028DE75 /* MediaUI in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 88D62C632B94E8410028DE75 /* MediaUI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		88ED1A272BBF34CC007626D0 /* MenuViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88ED1A262BBF34CC007626D0 /* MenuViewRouter.swift */; };
 		88ED1A292BBF45FD007626D0 /* NewsViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88ED1A282BBF45FD007626D0 /* NewsViewRouter.swift */; };
 		88ED1A2B2BBF47D5007626D0 /* VideoViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88ED1A2A2BBF47D5007626D0 /* VideoViewRouter.swift */; };
@@ -109,9 +106,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				88D62C652B94E8410028DE75 /* MediaUI in Embed Frameworks */,
-				88D62C622B94E8410028DE75 /* MediaNetwork in Embed Frameworks */,
-				88D62C5F2B94E8410028DE75 /* MediaContentful in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,9 +196,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88D62C642B94E8410028DE75 /* MediaUI in Frameworks */,
-				88D62C5E2B94E8410028DE75 /* MediaContentful in Frameworks */,
-				88D62C612B94E8410028DE75 /* MediaNetwork in Frameworks */,
+				8849F7AF2C5469D90054AB31 /* MediaUI in Frameworks */,
+				8849F7AD2C5469D60054AB31 /* MediaNetwork in Frameworks */,
+				8849F7AB2C5469D30054AB31 /* MediaContentful in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,9 +559,9 @@
 			);
 			name = Media;
 			packageProductDependencies = (
-				88D62C5D2B94E8410028DE75 /* MediaContentful */,
-				88D62C602B94E8410028DE75 /* MediaNetwork */,
-				88D62C632B94E8410028DE75 /* MediaUI */,
+				8849F7AA2C5469D30054AB31 /* MediaContentful */,
+				8849F7AC2C5469D60054AB31 /* MediaNetwork */,
+				8849F7AE2C5469D90054AB31 /* MediaUI */,
 			);
 			productName = Media;
 			productReference = 88D62BB02B94DC9B0028DE75 /* Media.app */;
@@ -1085,15 +1079,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		88D62C5D2B94E8410028DE75 /* MediaContentful */ = {
+		8849F7AA2C5469D30054AB31 /* MediaContentful */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MediaContentful;
 		};
-		88D62C602B94E8410028DE75 /* MediaNetwork */ = {
+		8849F7AC2C5469D60054AB31 /* MediaNetwork */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MediaNetwork;
 		};
-		88D62C632B94E8410028DE75 /* MediaUI */ = {
+		8849F7AE2C5469D90054AB31 /* MediaUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MediaUI;
 		};
