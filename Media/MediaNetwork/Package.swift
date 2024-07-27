@@ -22,7 +22,10 @@ let package = Package(
     targets: [
         .target(
             name: "MediaNetwork",
-            dependencies: []
+            dependencies: [],
+            swiftSettings: [
+                .enableExperimentalFeature("StrictConcurrency")
+            ]
         ),
         .testTarget(
             name: "Tests",
