@@ -1,8 +1,9 @@
 
 import Foundation
-import MediaNetwork
+import Combine
+@testable import MediaNetwork
 
-class TestClient: ApiClient {
+class TestClient: APIClient {
 
     init(
         data: Data = .init(),
@@ -18,12 +19,24 @@ class TestClient: ApiClient {
     let response: HTTPURLResponse
     let error: Error?
     
-    func fetchData(
-        for request: URLRequest
-    ) async throws -> (Data, URLResponse) {
-        if let error { throw error }
-        return (data, response)
+    /**
+     This type can be returned by an ``ApiClient`` when a client
+     requests data from an external API.
+     */
+    public struct APIResult {
+
+        public init(
+            data: Data,
+            response: URLResponse
+        ) {
+            self.data = data
+            self.response = response
+        }
+
+        public var data: Data
+        public var response: URLResponse
     }
+
 }
 
 class TestResponse: HTTPURLResponse {
@@ -36,7 +49,7 @@ class TestResponse: HTTPURLResponse {
         _ code: Int
     ) -> TestResponse {
         let response = TestResponse(
-            url: URL(string: "https://kankoda.com")!,
+            url: URL(string: "kankoda.com")!,
             mimeType: nil,
             expectedContentLength: 0,
             textEncodingName: nil
@@ -46,15 +59,15 @@ class TestResponse: HTTPURLResponse {
     }
 }
 
-enum TestEnvironment: ApiEnvironment {
+enum TestEnvironment: APIEnvironment {
 
     case staging
     case production
 
-    var url: String {
+    var baseURL: String {
         switch self {
-        case .staging: return "https://staging-api.imdb.com"
-        case .production: return "https://api.imdb.com"
+        case .staging: return "staging-api.imdb.com"
+        case .production: return "api.imdb.com"
         }
     }
 
@@ -67,7 +80,7 @@ enum TestEnvironment: ApiEnvironment {
     }
 }
 
-enum TestRoute: ApiRoute {
+enum TestRoute: APIRoute {
 
     case formLogin(userName: String, password: String)
     case movie(id: String)
@@ -75,7 +88,7 @@ enum TestRoute: ApiRoute {
     case search(query: String, page: Int)
     case searchWithArrayParams(years: [Int])
 
-    var httpMethod: HttpMethod {
+    var httpMethod: HTTPMethod {
         switch self {
         case .formLogin: return .post
         case .movie: return .get
@@ -87,11 +100,11 @@ enum TestRoute: ApiRoute {
 
     var path: String {
         switch self {
-        case .formLogin: return "formLogin"
-        case .movie(let id): return "movie/\(id)"
-        case .postLogin: return "postLogin"
-        case .search: return "search"
-        case .searchWithArrayParams: return "search"
+        case .formLogin: return "/formLogin"
+        case .movie(let id): return "/movie/\(id)"
+        case .postLogin: return "/postLogin"
+        case .search: return "/search"
+        case .searchWithArrayParams: return "/search"
         }
     }
 
@@ -107,7 +120,7 @@ enum TestRoute: ApiRoute {
         }
     }
 
-    var postData: Data? {
+    var uploadData: Data? {
         switch self {
         case .formLogin: return nil
         case .movie: return nil
@@ -134,6 +147,8 @@ enum TestRoute: ApiRoute {
         default: return nil
         }
     }
+    
+    var mockFile: String? { "" }
 }
 
 

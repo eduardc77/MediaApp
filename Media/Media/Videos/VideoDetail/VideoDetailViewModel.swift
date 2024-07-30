@@ -7,32 +7,28 @@ import Foundation
 import MediaNetwork
 
 final class VideoDetailViewModel: BaseViewModel<ViewState> {
-    typealias Environment = VideosService.Environment
-    typealias Route = VideosService.Route
+    let videosService: VideosServiceable
     
     @Published private(set) var videoDetail: Video?
     @Published private(set) var casts: CastModel?
     
-    private let session = URLSession.shared
-    private let environment = Environment.develop(apiKey: DemoAPIKeys.theMovieDB)
+    private let environment = Videos.Environment.develop(apiKey: DemoAPIKeys.theMovieDB)
     
     private let id: Int?
     
-    init(id: Int?) {
+    init(videosService: VideosServiceable, id: Int?) {
+        self.videosService = videosService
         self.id = id
         super.init()
     }
-    
+
     @MainActor
     func fetchDetails() async {
         guard let id = id else { return }
         self.changeState(.loading)
         
         do {
-            let result: Video = try await session.fetchItem(
-                at: Route.movie(id: id),
-                in: environment
-            )
+            let result: Video = try await videosService.getVideo(id: id)
             self.videoDetail = result
         } catch {
             self.changeState(.error(error: error.localizedDescription))
@@ -44,10 +40,7 @@ final class VideoDetailViewModel: BaseViewModel<ViewState> {
         guard let id = id else { return }
         
         do {
-            let result: CastModel = try await session.fetchItem(
-                at: Route.movieCredits(id: id),
-                in: environment
-            )
+            let result: CastModel = try await videosService.getVideoCredits(id: id)
             self.casts = result
             self.changeState(.finished)
         } catch {

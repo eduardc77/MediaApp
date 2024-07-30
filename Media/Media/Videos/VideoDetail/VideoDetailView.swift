@@ -10,8 +10,8 @@ struct VideoDetailView: View {
     @ObservedObject private var viewModel: VideoDetailViewModel
     @EnvironmentObject private var modalRouter: ModalScreenRouter
     
-    init(id: Int?) {
-        self.viewModel = VideoDetailViewModel(id: id)
+    init(id: Int?, videosService: VideosServiceable) {
+        self.viewModel = VideoDetailViewModel(videosService: videosService, id: id)
     }
     
     var body: some View {
@@ -23,7 +23,7 @@ struct VideoDetailView: View {
             case .finished:
                 ScrollView {
                     VStack {
-                        DetailHeaderView(imageURl: viewModel.videoDetail?.posterUrl(width: 500),
+                        DetailHeaderView(imageURL: viewModel.videoDetail?.posterURL(width: 500),
                                          title: viewModel.videoDetail?.title,
                                          rating: viewModel.videoDetail?.averageRating)
                         
@@ -75,7 +75,7 @@ struct VideoDetailView: View {
                 LazyHGrid(rows: columnGrid, spacing: 24) {
                     ForEach(data, id: \.id) { item in
                         CastGridItem(name: item.name,
-                                     imageURl: item.imageUrl(path: item.profilePath ?? "", width: 200))
+                                     imageURl: item.imageURL(path: item.profilePath ?? "", width: 200))
                     }
                 }
                 .padding(.horizontal)
@@ -108,7 +108,7 @@ struct VideoDetailView: View {
 
 struct VideoDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        VideoDetailView(id: 787699)
+        VideoDetailView(id: 787699, videosService: VideosService())
             .environmentObject(ModalScreenRouter())
     }
 }

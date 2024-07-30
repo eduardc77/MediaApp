@@ -1,22 +1,20 @@
 
-import Foundation
-
-public struct NewsService {}
+public struct News {}
 
 // MARK: - Environment
 
-public extension NewsService {
+public extension News {
     
-    enum Environment: ApiEnvironment {
+    enum Environment: APIEnvironment {
         case production
         case preproduction
         case develop
         
-        public var url: String {
+        public var baseURL: String {
             switch self {
             case .production: return ""
             case .preproduction: return ""
-            case .develop: return "https://newsapi.org"
+            case .develop: return "newsapi.org"
             }
         }
         
@@ -31,16 +29,16 @@ public extension NewsService {
             }
         }
         
-        public var queryParams: [String: String]? { nil }
+        public var apiVersion: String { "/v2" }
     }
 }
 
 
 // MARK: - Route
 
-public extension NewsService {
+public extension News {
     
-    enum Route: ApiRoute {
+    enum Route: APIRoute {
         
         case allNews(country: NewsCountry)
         case searchNews(query: String)
@@ -49,9 +47,9 @@ public extension NewsService {
         public var path: String {
             switch self {
             case .searchNews:
-                return "/v2/everything"
+                return "/everything"
             case .allNews, .newsByCategory:
-                return "/v2/top-headlines"
+                return "/top-headlines"
             }
         }
         
@@ -66,17 +64,21 @@ public extension NewsService {
             }
         }
         
-        public var httpMethod: HttpMethod {
+        public var httpMethod: HTTPMethod {
             switch self {
             case .allNews, .searchNews, .newsByCategory:
                 return .get
             }
         }
         
-        public var headers: [String: String]? { nil }
-        
-        public var formParams: [String: String]? { nil }
-        
-        public var postData: Data? { nil }
+        public var mockFile: String? {
+            switch self {
+            case .allNews:
+                return "_mockAllNewsResponse"
+            case .newsByCategory:
+                return "_mockNewsByCategoryResponse"
+            default: return ""
+            }
+        }
     }
 }

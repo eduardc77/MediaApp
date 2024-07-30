@@ -12,8 +12,8 @@ struct ArticleSmallGridItem: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            if let imageUrl = article.featuredImage?.url {
-                AsyncImageView(url: imageUrl, size: .custom(width: 160, height: 100))
+            if let imageURL = article.featuredImage?.url {
+                AsyncImageView(url: imageURL, size: .custom(width: 160, height: 100))
                     .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                     .overlay(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.secondary.opacity(0.2), lineWidth: 0.8))
             } else {
@@ -41,8 +41,8 @@ struct ArticleMediumGridItem: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            if let imageUrl = article.featuredImage?.url {
-                AsyncImageView(url: imageUrl, size: .custom(height: 200))
+            if let imageURL = article.featuredImage?.url {
+                AsyncImageView(url: imageURL, size: .custom(height: 200))
                     .clipped()
             } else {
                 Color.secondary
@@ -78,8 +78,8 @@ struct ArticleLargeGridItem: View {
     
     var body: some View {
         GeometryReader { geometry in
-            if let imageUrl = article.featuredImage?.url {
-                AsyncImageView(url: imageUrl, size: .custom(width: geometry.size.width, height: 400))
+            if let imageURL = article.featuredImage?.url {
+                AsyncImageView(url: imageURL, size: .custom(width: geometry.size.width, height: 400))
                     .clipped()
                     .buttonStyle(.plain)
             }

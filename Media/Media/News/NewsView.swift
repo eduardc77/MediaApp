@@ -70,7 +70,7 @@ private extension NewsView {
                 Button {
                     router.push(article)
                 } label: {
-                    NewsGridItem(item: NewsItem(imageUrl: article.urlToImage ?? "",
+                    NewsGridItem(item: NewsItem(imageURL: article.urlToImage ?? "",
                                                 owner: article.source?.name ?? "",
                                                 title: article.title ?? "",
                                                 date:  article.publishedAt?.timestampString() ?? ""))

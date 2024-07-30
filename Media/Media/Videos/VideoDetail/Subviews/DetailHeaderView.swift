@@ -7,7 +7,7 @@ import SwiftUI
 import MediaUI
 
 struct DetailHeaderView: View {
-    var imageURl: URL?
+    var imageURL: URL?
     var title: String?
     var rating: Double?
     
@@ -36,8 +36,8 @@ struct DetailHeaderView: View {
     
     @ViewBuilder
     private var videoImage: some View {
-        if let imageUrl = imageURl {
-            AsyncImageView(url: imageUrl, contentMode: .fit)
+        if let imageURL = imageURL {
+            AsyncImageView(url: imageURL, contentMode: .fit)
         } else {
             Rectangle()
                 .fill(.tertiary)

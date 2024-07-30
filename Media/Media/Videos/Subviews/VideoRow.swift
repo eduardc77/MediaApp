@@ -15,8 +15,8 @@ struct VideoRow: View {
     
     var body: some View {
         HStack {
-            if let imageUrl = item.imageUrl {
-                AsyncImageView(url: imageUrl, size: .custom(height: 100), contentMode: .fit)
+            if let imageURL = item.imageURL {
+                AsyncImageView(url: imageURL, size: .custom(height: 100), contentMode: .fit)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
             } else {
                 Color.secondary.frame(height: 100)

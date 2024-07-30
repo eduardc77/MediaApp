@@ -7,9 +7,9 @@ import Foundation
 
  Make sure to specify raw data values, then encode them when
  creating the request. This is automatically done when using
- an ``ApiClient`` to perform requests.
+ an ``APIClient`` to perform requests.
  */
-public protocol ApiRequestData {
+public protocol APIRequestData {
 
     /// Optional header parameters.
     var headers: [String: String]? { get }
@@ -18,7 +18,7 @@ public protocol ApiRequestData {
     var queryParams: [String: String]? { get }
 }
 
-public extension ApiRequestData {
+public extension APIRequestData {
 
     /// Convert ``queryParams`` to url encoded query items.
     var encodedQueryItems: [URLQueryItem]? {
@@ -26,4 +26,10 @@ public extension ApiRequestData {
             .map { URLQueryItem(name: $0.key, value: $0.value) }
             .sorted { $0.name < $1.name }
     }
+    
+    /// Default value.
+    var headers: [String: String]? { return nil }
+
+    /// Default value.
+    var queryParams: [String: String]? { return nil }
 }

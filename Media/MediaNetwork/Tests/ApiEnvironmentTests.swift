@@ -1,6 +1,6 @@
 
 import XCTest
-import MediaNetwork
+@testable import MediaNetwork
 
 final class ApiEnvironmentTests: XCTestCase {
 
@@ -9,10 +9,10 @@ final class ApiEnvironmentTests: XCTestCase {
         return try? env.urlRequest(for: route)
     }
 
-    func testUrlRequestIsCreatedWithRoute() throws {
+    func testURLRequestIsCreatedWithRoute() throws {
         XCTAssertNotNil(request(for: .movie(id: "ABC123")))
-        XCTAssertNotNil(request(for: .formLogin(userName: "danielsaidi", password: "super-secret")))
-        XCTAssertNotNil(request(for: .postLogin(userName: "danielsaidi", password: "super-secret")))
+        XCTAssertNotNil(request(for: .formLogin(userName: "johnappleseed", password: "super-secret")))
+        XCTAssertNotNil(request(for: .postLogin(userName: "johnappleseed", password: "super-secret")))
         XCTAssertNotNil(request(for: .search(query: "A nice movie", page: 1)))
     }
 }

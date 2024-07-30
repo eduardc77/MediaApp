@@ -78,7 +78,7 @@ struct VideosGrid: View {
         NavigationButton {
             router.push(VideoDestination.videoDetail(id: video.id))
         } label: {
-            VideoGridItem(item: VideoItem(imageUrl: video.posterUrl(width: 200),
+            VideoGridItem(item: VideoItem(imageURL: video.posterURL(width: 200),
                                           title: video.title,
                                           date: video.releaseDate ?? ""))
         }

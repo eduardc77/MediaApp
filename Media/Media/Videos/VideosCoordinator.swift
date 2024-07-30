@@ -11,13 +11,15 @@ struct VideosCoordinator: View {
     @EnvironmentObject private var modalRouter: ModalScreenRouter
     @State private var isWebViewLoading = false
     
+    @StateObject private var model = VideosViewModel()
+    
     var body: some View {
         NavigationStack(path: $router.path) {
-            VideosView()
+            VideosView(model: model)
                 .navigationDestination(for: AnyHashable.self) { destination in
                     switch destination {
                     case .videoDetail(let id) as VideoDestination:
-                        VideoDetailView(id: id)
+                        VideoDetailView(id: id, videosService: model.videosService)
                     default:
                         EmptyView()
                     }

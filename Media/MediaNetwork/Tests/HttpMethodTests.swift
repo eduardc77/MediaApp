@@ -1,15 +1,15 @@
 
 import XCTest
-import MediaNetwork
+@testable import MediaNetwork
 
 final class HttpMethodTests: XCTestCase {
 
-    func method(for method: HttpMethod) -> String {
+    func method(for method: HTTPMethod) -> String {
         method.method
     }
 
     func testMethodIsUppercasedForAllCases() throws {
-        HttpMethod.allCases.forEach { method in
+        HTTPMethod.allCases.forEach { method in
             XCTAssertEqual(method.method, method.rawValue.uppercased())
         }
     }
@@ -26,7 +26,7 @@ final class HttpMethodTests: XCTestCase {
     }
 
     func testMethodUsesRawNameAsId() throws {
-        HttpMethod.allCases.forEach { method in
+        HTTPMethod.allCases.forEach { method in
             XCTAssertEqual(method.id, method.rawValue)
         }
     }

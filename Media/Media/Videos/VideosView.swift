@@ -8,7 +8,7 @@ import MediaUI
 import MediaNetwork
 
 struct VideosView: View {
-    @StateObject private var model = VideosViewModel()
+    @ObservedObject var model: VideosViewModel
     
     @EnvironmentObject private var router: VideoViewRouter
     @EnvironmentObject private var modalRouter: ModalScreenRouter
@@ -115,7 +115,7 @@ private extension VideosView {
         NavigationButton {
             router.push(VideoDestination.videoDetail(id: video.id))
         } label: {
-            VideoRow(item: VideoItem(imageUrl: video.posterUrl(width: 200),
+            VideoRow(item: VideoItem(imageURL: video.posterURL(width: 200),
                                      title: video.title,
                                      date: video.releaseDate ?? ""))
         }
@@ -161,7 +161,7 @@ private extension VideosView {
 }
 
 #Preview {
-    VideosView()
+    VideosView(model: VideosViewModel(videosService: VideosServiceMock()))
         .environmentObject(ModalScreenRouter())
 }
 

@@ -57,7 +57,7 @@ public struct Cast: Codable {
         self.department = department
     }
     
-    public func imageUrl(path: String, width: Int) -> URL? {
+    public func imageURL(path: String, width: Int) -> URL? {
         URL(string: "https://image.tmdb.org/t/p/w\(width)" + path)
     }
 }

@@ -7,14 +7,15 @@ import Foundation
 import MediaNetwork
 
 final class NewsViewModel: BaseViewModel<ViewState> {
-    typealias Environment = NewsService.Environment
-    typealias Route = NewsService.Route
+    let newsService: NewsServiceable
     
     @Published private(set) var allNews = [NewsArticle]()
     
     var selectedCategory: NewsCategory
     
-    init(selectedCategory: NewsCategory) {
+    //Use dependency injection not assigning in the initializer
+    init(newsService: NewsServiceable = NewsService(), selectedCategory: NewsCategory) { // NewsServiceMock()
+        self.newsService = newsService
         self.selectedCategory = selectedCategory
     }
 
@@ -24,10 +25,7 @@ final class NewsViewModel: BaseViewModel<ViewState> {
         changeState(.loading)
         
         do {
-            let result: NewsServiceModel = try await URLSession.shared.fetchItem(
-                at: selectedCategory == .all ? Route.allNews(country: .us) : Route.newsByCategory(category: selectedCategory.title, country: .us),
-                in: Environment.develop)
-            
+            let result: NewsServiceModel = try await newsService.getNews(for: selectedCategory == .all ? News.Route.allNews(country: .us) : News.Route.newsByCategory(category: selectedCategory.title, country: .us))
             self.changeState(.finished)
             self.allNews = result.articles ?? []
         } catch {

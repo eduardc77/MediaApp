@@ -4,7 +4,7 @@ import Foundation
 /**
  This protocol can be implemented to define API routes.
 
- An ``ApiRoute`` must define an ``httpMethod`` as well as an
+ An ``APIRoute`` must define an ``httpMethod`` as well as an
  environment-relative path, headers, query params, data, etc.
  
  You can use an enum to define routes, and associated values
@@ -12,29 +12,45 @@ import Foundation
 
  When a route defines ``formParams``, the URL request should
  use `application/x-www-form-urlencoded` as content type and
- ignore the ``postData``. The two are mutually exclusive and
+ ignore the ``uploadData``. The two are mutually exclusive and
  ``formParams`` should take precedence when both are defined.
  
- Both ``ApiEnvironment`` and ``ApiRoute`` can define headers
+ Both ``APIEnvironment`` and ``APIRoute`` can define headers
  and query parameters. An environment can use this to define
  global data, while a route defines route-specific data.
  */
-public protocol ApiRoute: ApiRequestData {
+public protocol APIRoute: APIRequestData {
 
     /// The HTTP method to use for the route.
-    var httpMethod: HttpMethod { get }
+    var httpMethod: HTTPMethod { get }
 
     /// The route's ``ApiEnvironment`` relative path.
     var path: String { get }
+    
+    var token: String? { get }
 
     /// Optional form data, which is sent as request body.
     var formParams: [String: String]? { get }
     
-    /// Optional post data, which is sent as request body.
-    var postData: Data? { get }
+    /// Optional upload data, which is sent as request body.
+    var uploadData: Data? { get }
+    
+    var mockFile: String? { get }
 }
 
-public extension ApiRoute {
+extension APIRoute {
+    
+    // Default values
+    public var token: String? { nil }
+    
+    public var headers: [String: String]? { nil }
+    
+    public var formParams: [String: String]? { nil }
+    
+    public var uploadData: Data? { nil }
+}
+
+public extension APIRoute {
 
     /// Convert ``encodedFormItems`` to `.utf8` encoded data.
     var encodedFormData: Data? {
@@ -53,17 +69,27 @@ public extension ApiRoute {
     }
 
     /// Get a `URLRequest` for the route and its properties.
-    func urlRequest(for env: ApiEnvironment) throws -> URLRequest {
-        guard let envUrl = URL(string: env.url) else { throw ApiError.invalidEnvironmentUrl(env.url) }
-        let routeUrl = envUrl.appendingPathComponent(path)
-        guard var components = urlComponents(from: routeUrl) else { throw ApiError.failedToCreateComponentsFromUrl(routeUrl) }
-        components.queryItems = queryItems(for: env)
-        guard let requestUrl = components.url else { throw ApiError.noUrlInComponents(components) }
-        var request = URLRequest(url: requestUrl)
+    func urlRequest(for env: APIEnvironment) throws -> URLRequest {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = env.scheme
+        urlComponents.host = env.baseURL
+        if !env.apiVersion.isEmpty {
+            urlComponents.path = env.apiVersion + path
+        } else {
+            urlComponents.path = path
+        }
+        urlComponents.queryItems = queryItems(for: env)
+
+        guard let requestURL = urlComponents.url else { throw APIError.invalidURLInComponents(urlComponents) }
+        var request = URLRequest(url: requestURL)
         let formData = encodedFormData
         request.allHTTPHeaderFields = headers(for: env)
-        request.httpBody = formData ?? postData
+        request.httpBody = formData ?? uploadData
         request.httpMethod = httpMethod.method
+        
+        if let token = token {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
         let isFormRequest = formData != nil
         let contentType = isFormRequest ? "application/x-www-form-urlencoded" : "application/json"
         request.setValue(contentType, forHTTPHeaderField: "Content-Type")
@@ -71,17 +97,17 @@ public extension ApiRoute {
     }
 }
 
-public extension ApiEnvironment {
+public extension APIEnvironment {
 
     /// Get a `URLRequest` for a certain ``ApiRoute``.
-    func urlRequest(for route: ApiRoute) throws -> URLRequest {
+    func urlRequest(for route: APIRoute) throws -> URLRequest {
         try route.urlRequest(for: self)
     }
 }
 
-private extension ApiRoute {
+private extension APIRoute {
 
-    func headers(for env: ApiEnvironment) -> [String: String] {
+    func headers(for env: APIEnvironment) -> [String: String] {
         var result = env.headers ?? [:]
         headers?.forEach {
             result[$0.key] = $0.value
@@ -89,7 +115,7 @@ private extension ApiRoute {
         return result
     }
 
-    func queryItems(for env: ApiEnvironment) -> [URLQueryItem] {
+    func queryItems(for env: APIEnvironment) -> [URLQueryItem] {
         let routeData = encodedQueryItems ?? []
         let envData = env.encodedQueryItems ?? []
         return routeData + envData

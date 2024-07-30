@@ -16,7 +16,7 @@ struct NewsGridItem: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            if let imageURl = URL(string: item.imageUrl) {
+            if let imageURl = URL(string: item.imageURL) {
                 Color.clear.overlay {
                     AsyncImageView(url: imageURl, size: .custom(height: 120))
                 }
@@ -59,7 +59,7 @@ struct NewsGridItem: View {
 }
 
 struct NewsItem {
-    let imageUrl: String
+    let imageURL: String
     let owner: String
     let title: String
     let date: String

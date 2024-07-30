@@ -14,8 +14,8 @@ struct HeroBannerView: View {
     var body: some View {
         VStack(spacing: 20) {
             // Image
-            if let imageUrl = model.image?.url {
-                AsyncImageView(url: imageUrl)
+            if let imageURL = model.image?.url {
+                AsyncImageView(url: imageURL)
             } else {
                 Color.secondary
             }

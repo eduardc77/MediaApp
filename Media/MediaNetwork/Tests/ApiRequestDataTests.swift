@@ -1,6 +1,6 @@
 
 import XCTest
-import MediaNetwork
+@testable import MediaNetwork
 
 final class ApiRequestDataTests: XCTestCase {
 

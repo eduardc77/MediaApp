@@ -15,8 +15,8 @@ struct VideoGridItem: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            if let imageUrl = item.imageUrl {
-                AsyncImageView(url: imageUrl, size: .custom(height: 240))
+            if let imageURL = item.imageURL {
+                AsyncImageView(url: imageURL, size: .custom(height: 240))
                     .clipped()
             } else {
                 Color.secondary.frame(height: 240)
@@ -46,7 +46,7 @@ struct VideoGridItem: View {
 }
 
 struct VideoItem {
-    let imageUrl: URL?
+    let imageURL: URL?
     let title: String
     let date: String
 }

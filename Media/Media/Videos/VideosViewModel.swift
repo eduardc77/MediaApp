@@ -7,8 +7,7 @@ import Foundation
 import MediaNetwork
 
 final class VideosViewModel: BaseViewModel<ViewState> {
-    typealias Environment = VideosService.Environment
-    typealias Route = VideosService.Route
+    let videosService: VideosServiceable
     
     @Published private(set) var videoPaginationResult: VideoPaginationResult?
     @Published private(set) var discoverMovies = [Video]()
@@ -20,33 +19,31 @@ final class VideosViewModel: BaseViewModel<ViewState> {
     @Published var movieList: MovieList = .discover {
         willSet {
             discoverMovies.removeAll()
-
+            
             Task {
                 await fetchDiscoverData()
             }
         }
     }
     
-    var route: Route {
+    var route: Videos.Route {
         switch movieList {
         case .discover:
-            Route.discoverMovies(page: currentPage)
+            Videos.Route.discoverMovies(page: currentPage)
         case .nowPlaying:
-            Route.nowPlaying(page: currentPage)
+            Videos.Route.nowPlaying(page: currentPage)
         case .popular:
-            Route.popular(page: currentPage)
+            Videos.Route.popular(page: currentPage)
         case .topRated:
-            Route.topRated(page: currentPage)
+            Videos.Route.topRated(page: currentPage)
         case .upcoming:
-            Route.upcoming(page: currentPage)
+            Videos.Route.upcoming(page: currentPage)
         }
     }
     
     @Published private var isLoading: Bool = false
     
-    
-    private let session = URLSession.shared
-    let environment = Environment.develop(apiKey: DemoAPIKeys.theMovieDB)
+    let environment = Videos.Environment.develop(apiKey: DemoAPIKeys.theMovieDB)
     
     var videos: [Video] {
         searchMovies.isEmpty ? discoverMovies : searchMovies
@@ -68,6 +65,11 @@ final class VideosViewModel: BaseViewModel<ViewState> {
         changeState(.empty)
     }
     
+    //Use dependency injection not assigning in the initializer
+    init(videosService: VideosServiceable = VideosService()) { // VideosServiceMock()
+        self.videosService = videosService
+    }
+    
     @MainActor
     func fetchDiscoverData() async {
         guard state != .empty else { return }
@@ -75,10 +77,7 @@ final class VideosViewModel: BaseViewModel<ViewState> {
             self.changeState(.loading)
         }
         do {
-            let result: VideoPaginationResult = try await session.fetchItem(
-                at: route,
-                in: environment
-            )
+            let result: VideoPaginationResult = try await videosService.getVideos(for: route)
             self.updateDiscoverResult(with: result)
             self.videoPaginationResult = result
             self.changeState(.finished)
@@ -90,10 +89,7 @@ final class VideosViewModel: BaseViewModel<ViewState> {
     @MainActor
     func search(with query: String) async {
         do {
-            let result: VideoPaginationResult = try await session.fetchItem(
-                at: Route.searchMovies(query: query, page: currentPage),
-                in: environment
-            )
+            let result: VideoPaginationResult = try await videosService.searchVideos(query: query, page: currentPage)
             self.updateSearchResult(with: result)
             self.videoPaginationResult = result
             

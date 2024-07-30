@@ -1,38 +1,38 @@
 
-import Foundation
-
-public struct VideosService {}
+public struct Videos {}
 
 // MARK: - Environment
 
-public extension VideosService {
+public extension Videos {
     
-    enum Environment: ApiEnvironment {
+    enum Environment: APIEnvironment {
         
         case develop(apiKey: String)
         
-        public var url: String {
+        public var baseURL: String {
             switch self {
-            case .develop: return "https://api.themoviedb.org/3"
+            case .develop: return "api.themoviedb.org"
             }
         }
-        
-        public var headers: [String: String]? { nil }
-        
+
         public var queryParams: [String: String]? {
-            // Attaching the API key via the 'api_key' query parameter.
             switch self {
-            case .develop(let key): return ["api_key": key]
+            case .develop(let key): 
+                return [
+                    "api_key": key
+                ]
             }
         }
+        
+        public var apiVersion: String { "/3" }
     }
 }
 
 // MARK: - Route
 
-public extension VideosService {
+public extension Videos {
     
-    enum Route: ApiRoute {
+    enum Route: APIRoute {
         case discoverMovies(page: Int)
         case nowPlaying(page: Int)
         case popular(page: Int)
@@ -46,23 +46,23 @@ public extension VideosService {
         public var path: String {
             switch self {
             case .discoverMovies: 
-                return "discover/movie"
+                return "/discover/movie"
             case .nowPlaying:
-                return "movie/now_playing"
+                return "/movie/now_playing"
             case .popular:
-                return "movie/popular"
+                return "/movie/popular"
             case .topRated:
-                return "movie/top_rated"
+                return "/movie/top_rated"
             case .upcoming:
-                return "movie/upcoming"
+                return "/movie/upcoming"
             case .movie(let id):
-                return "movie/\(id)"
+                return "/movie/\(id)"
             case .movieCredits(let id):
-                return "movie/\(id)/credits"
-            case .movieVideos(let id): 
-                return "movie/\(id)/movies"
-            case .searchMovies: 
-                return "search/movie"
+                return "/movie/\(id)/credits"
+            case .movieVideos(let id):
+                return "/movie/\(id)/movies"
+            case .searchMovies:
+                return "/search/movie"
             }
         }
         
@@ -79,17 +79,19 @@ public extension VideosService {
             }
         }
         
-        public var httpMethod: HttpMethod {
+        public var httpMethod: HTTPMethod {
             switch self {
             case .discoverMovies, .nowPlaying, .popular, .topRated, .upcoming, .movie, .movieCredits, .movieVideos, .searchMovies:
                 return .get
             }
         }
         
-        public var headers: [String: String]? { nil }
-        
-        public var formParams: [String: String]? { nil }
-        
-        public var postData: Data? { nil }
+        public var mockFile: String? {
+            switch self {
+            case .discoverMovies:
+                return "_mockVideosResponse"
+            default: return ""
+            }
+        }
     }
 }

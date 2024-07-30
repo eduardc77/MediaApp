@@ -19,7 +19,7 @@ public struct Video: Codable, Hashable, Identifiable {
     public let averageRating: Double?
     public let voteCount: Int?
     
-    public let homepageUrl: String?
+    public let homepageURL: String?
     public let backdropPath: String?
     public let posterPath: String?
     public let profilePath: String?
@@ -44,7 +44,7 @@ public struct Video: Codable, Hashable, Identifiable {
         case averageRating = "vote_average"
         case voteCount = "vote_count"
         
-        case homepageUrl = "homepage"
+        case homepageURL = "homepage"
         case backdropPath = "backdrop_path"
         case posterPath = "poster_path"
         case profilePath = "profile_path"
@@ -52,15 +52,15 @@ public struct Video: Codable, Hashable, Identifiable {
         case isAdultMovie = "adult"
     }
     
-    public func backdropUrl(width: Int) -> URL? {
-        imageUrl(path: backdropPath ?? "", width: width)
+    public func backdropURL(width: Int) -> URL? {
+        imageURL(path: backdropPath ?? "", width: width)
     }
     
-    public func posterUrl(width: Int) -> URL? {
-        imageUrl(path: posterPath ?? "", width: width)
+    public func posterURL(width: Int) -> URL? {
+        imageURL(path: posterPath ?? "", width: width)
     }
     
-    func imageUrl(path: String, width: Int) -> URL? {
+    func imageURL(path: String, width: Int) -> URL? {
         URL(string: "https://image.tmdb.org/t/p/w\(width)" + path)
     }
 }
